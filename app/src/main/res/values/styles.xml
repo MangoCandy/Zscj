@@ -8,4 +8,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="roll_list_style">
+        <item name="android:background">@drawable/normal_click</item>
+        <item name="android:padding">20dp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+    <style name="list_text_style">
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">#161616</item>
+    </style>
 </resources>
