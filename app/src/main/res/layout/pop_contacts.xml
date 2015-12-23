@@ -1,79 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.hnxind.rollManager.Act_rollManager">
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        app:titleTextColor="#fff"
+    android:background="#fff">
+    <LinearLayout
         android:background="@color/colorPrimary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <LinearLayout
-        android:onClick="openContacts"
-        style="@style/roll_list_style"
+        android:padding="20dp"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/iconfont_contactsbook"/>
         <TextView
-            style="@style/list_text_style"
-            android:text="班级通讯录"
+            android:textSize="20dp"
+            android:textColor="#fff"
+            android:id="@+id/contact_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
-
-    //成绩查询
     <LinearLayout
-        android:onClick="openScore"
+        android:background="#83b6b6b6"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"></LinearLayout>
+    <LinearLayout
+        android:id="@+id/call"
+        android:background="@drawable/normal_click"
         style="@style/roll_list_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
+            android:src="@mipmap/iconfont_call"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/iconfont_score"/>
+            android:layout_height="wrap_content" />
         <TextView
             style="@style/list_text_style"
-            android:text="成绩查询"
+            android:text="拨打电话"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
-
-    //课表查询
     <LinearLayout
+        android:id="@+id/sms"
         style="@style/roll_list_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
+            android:src="@mipmap/iconfont_sms"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/iconfont_kebiao"/>
+            android:layout_height="wrap_content" />
         <TextView
             style="@style/list_text_style"
-            android:text="课表查询"
+            android:text="发送短信"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
-
-    //学费查询
     <LinearLayout
-        android:onClick="openPay"
+        android:id="@+id/copy"
         style="@style/roll_list_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
+            android:src="@mipmap/iconfont_copy"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/iconfont_qian"/>
+            android:layout_height="wrap_content" />
         <TextView
             style="@style/list_text_style"
-            android:text="学费查询"
+            android:text="复制号码"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>

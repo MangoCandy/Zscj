@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void initToolBar(){
         Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setNavigationIcon(R.mipmap.logo);
+//        toolbar.setNavigationIcon(R.mipmap.logo);
         setSupportActionBar(toolbar);
     }
     public void initView(){

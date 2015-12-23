@@ -9,10 +9,20 @@ public class UserInfo {
     public static String IDCARD="card_id";
     public static String ROLE="role";
     public static String NAME="name";
+    public static String STUDENT_NUM="studentsNumber";
 
     private String idCard;
     private String role;
     private String name;
+    private String studentnum;
+
+    public String getStudentnum() {
+        return studentnum;
+    }
+
+    public void setStudentnum(String studentnum) {
+        this.studentnum = studentnum;
+    }
 
     public String getIdCard() {
         return idCard;

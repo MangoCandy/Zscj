@@ -19,6 +19,7 @@ public class Utils_user {
         editor.putString(UserInfo.IDCARD,userInfo.getIdCard());
         editor.putString(UserInfo.NAME,userInfo.getName());
         editor.putString(UserInfo.ROLE,userInfo.getRole());
+        editor.putString(UserInfo.STUDENT_NUM,userInfo.getStudentnum());
         editor.commit();
     }
     public UserInfo getUserInfo(){//获取用户信息
@@ -27,6 +28,7 @@ public class Utils_user {
         userInfo.setIdCard(sharedPreferences.getString(UserInfo.IDCARD,""));
         userInfo.setName(sharedPreferences.getString(UserInfo.NAME,""));
         userInfo.setRole(sharedPreferences.getString(UserInfo.ROLE,""));
+        userInfo.setStudentnum(sharedPreferences.getString(UserInfo.STUDENT_NUM,""));
         return userInfo;
     }
 }

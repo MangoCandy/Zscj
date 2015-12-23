@@ -1,10 +1,14 @@
 package com.hnxind.rollManager;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.hnxind.rollManager.Act_Contacts.Act_Contacts;
+import com.hnxind.rollManager.Act_PayForStudy.Act_PayForStudy;
+import com.hnxind.rollManager.Act_Score.Act_score;
 import com.hnxind.zscj.R;
 
 public class Act_rollManager extends AppCompatActivity {
@@ -26,5 +30,21 @@ public class Act_rollManager extends AppCompatActivity {
                 onBackPressed();
             }
         });
+    }
+
+    //跳转联系人
+    public void openContacts(View view){
+        Intent intent=new Intent(this, Act_Contacts.class);
+        startActivity(intent);
+    }
+
+    public void openScore(View view) {
+        Intent intent=new Intent(this, Act_score.class);
+        startActivity(intent);
+    }
+
+    public void openPay(View view) {//学费查询
+        Intent intent=new Intent(this, Act_PayForStudy.class);
+        startActivity(intent);
     }
 }

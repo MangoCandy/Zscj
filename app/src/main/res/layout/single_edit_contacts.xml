@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/layout_single_contact"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:background="@drawable/normal_click"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+        <RelativeLayout
+            android:layout_centerVertical="true"
+            android:id="@+id/name_head"
+            android:layout_width="70dp"
+            android:layout_height="70dp">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_centerInParent="true"
+                android:id="@+id/name_head_bg"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="#961c90c6"/>
+            <TextView
+                android:id="@+id/head_text"
+                android:textColor="#fff"
+                android:textSize="25dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="杨"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical|left"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+            <TextView
+                android:gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:id="@+id/single_contact_name"
+                android:text="姓名"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:id="@+id/single_contact_num"
+                android:text="asd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#4dbcbcbc"
+        android:layout_alignParentBottom="true"
+        />
+</RelativeLayout>

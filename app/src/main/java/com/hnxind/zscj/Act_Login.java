@@ -105,6 +105,7 @@ public class Act_Login extends AppCompatActivity {
                         userInfo.setRole(jsonObject.getString(UserInfo.ROLE));
                         userInfo.setName(jsonObject.getString(UserInfo.NAME));
                         userInfo.setIdCard(jsonObject.getString(UserInfo.IDCARD));
+                        userInfo.setStudentnum(usernameText);
                         utils_user.saveUserInfo(userInfo);//保存用户信息
                         saveCheck();//保存checkbox状态
                         if(remember.isChecked()){
