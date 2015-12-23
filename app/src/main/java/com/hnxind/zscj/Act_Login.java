@@ -1,8 +1,10 @@
 package com.hnxind.zscj;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,11 +25,13 @@ import com.hnxind.model.Grid;
 import com.hnxind.model.UserInfo;
 import com.hnxind.model.mUrl;
 import com.hnxind.utils.Utils_user;
+
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,6 +61,7 @@ public class Act_Login extends AppCompatActivity {
                 login(null);
             }
         }
+
     }
 
     public void initView(){
@@ -88,6 +93,8 @@ public class Act_Login extends AppCompatActivity {
     };
     //Volley请求登陆
     public void login(View view){
+        initProgress();//加载圈
+
         usernameText=username.getText().toString();
         passwordText=password.getText().toString();
 
@@ -96,6 +103,7 @@ public class Act_Login extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 try {
+//                    progressDialog.dismiss();
                     Log.i("asd",response);
                     JSONObject jsonObject=new JSONObject(response);
                     String code=jsonObject.getString(mUrl.retCode);
@@ -123,6 +131,7 @@ public class Act_Login extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
                 Log.i("asd",error+"");
             }
         }){
@@ -167,5 +176,13 @@ public class Act_Login extends AppCompatActivity {
         SharedPreferences sharedPreferences=getSharedPreferences("zscj",MODE_PRIVATE);
         username.setText(sharedPreferences.getString("username",""));
         password.setText(sharedPreferences.getString("password",""));
+    }
+    ProgressDialog progressDialog;
+    public void initProgress(){
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setCancelable(true);
+        progressDialog.setMessage("正在请求登陆...");
+        progressDialog.show();
     }
 }

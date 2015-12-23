@@ -35,18 +35,18 @@
         <activity
             android:name="com.hnxind.rollManager.Act_rollManager"
             android:label="@string/roll_manager"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/mStyle" />
         <activity
             android:name="com.hnxind.rollManager.Act_Contacts.Act_Contacts"
             android:label="班级通讯录"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/mStyle" />
         <activity
             android:name="com.hnxind.rollManager.Act_Score.Act_score"
             android:label="成绩查询"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/mStyle" />
         <activity android:name="com.hnxind.rollManager.Act_PayForStudy.Act_PayForStudy"
             android:label="学费查询"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/mStyle"></activity>
     </application>
 
 </manifest>
