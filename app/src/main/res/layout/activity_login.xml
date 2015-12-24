@@ -1,67 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.hnxind.zscj.Act_Login">
-    //整个登陆框
+    tools:context="com.hnxind.zscj.Act_Login"
+    >
     <LinearLayout
-        android:padding="40dp"
         android:orientation="vertical"
-        android:layout_centerInParent="true"
+        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <android.support.design.widget.TextInputLayout
+        android:layout_height="match_parent">
+        <ImageView
+            android:background="@mipmap/yinying"
+            android:scaleType="fitXY"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-            <EditText
-                android:id="@+id/username"
-                android:hint="@string/username"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-            <EditText
-                android:id="@+id/password"
-                android:inputType="textPassword"
-                android:hint="@string/password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </android.support.design.widget.TextInputLayout>
-
+            android:layout_height="50dp" />
+        <ImageView
+            android:src="@mipmap/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        //整个登陆框
         <LinearLayout
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
+            android:padding="40dp"
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <CheckBox
-                android:id="@+id/loginAuto"
-                android:text="自动登陆"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <LinearLayout
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
-            <CheckBox
-                android:id="@+id/remember"
-                android:text="记住密码"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <EditText
+                    android:maxLines="1"
+                    android:id="@+id/username"
+                    android:hint="@string/username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <EditText
+                    android:maxLines="1"
+                    android:id="@+id/password"
+                    android:inputType="textPassword"
+                    android:hint="@string/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </android.support.design.widget.TextInputLayout>
 
-        //提交按钮
-        <Button
-            android:layout_marginTop="30dp"
-            android:onClick="login"
-            android:text="提交"
-            android:background="@drawable/login_btn"
-            android:textColor="#fff"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <CheckBox
+                    android:id="@+id/loginAuto"
+                    android:text="自动登陆"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+                <CheckBox
+                    android:id="@+id/remember"
+                    android:text="记住密码"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            //提交按钮
+            <Button
+                android:layout_marginTop="30dp"
+                android:onClick="login"
+                android:text="提交"
+                android:background="@drawable/login_btn"
+                android:textColor="#fff"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+        </LinearLayout>
     </LinearLayout>
-</RelativeLayout>
+</ScrollView>

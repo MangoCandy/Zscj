@@ -28,9 +28,6 @@ public class Act_SchoolCard extends AppCompatActivity {
             }
         });
     }
-    public void openGuashi(View view) {//挂失
-
-    }
 
     public void openCostList(View view) {//支付历史
         Intent intent=new Intent(this, Act_CostList.class);

@@ -19,8 +19,8 @@
         <activity
             android:name=".Act_Login"
             android:label="@string/login_lable"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:windowSoftInputMode="adjustResize|adjustPan">
+            android:theme="@style/loginStyle"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
