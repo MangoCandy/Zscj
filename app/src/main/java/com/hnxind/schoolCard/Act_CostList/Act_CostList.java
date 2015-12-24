@@ -1,4 +1,4 @@
-package com.hnxind.rollManager.Act_PayForStudy;
+package com.hnxind.schoolCard.Act_CostList;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -16,8 +15,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.hnxind.model.Contact;
-import com.hnxind.model.Tuition;
 import com.hnxind.model.UserInfo;
 import com.hnxind.model.mUrl;
 import com.hnxind.utils.Utils_user;
@@ -27,25 +24,19 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class Act_PayForStudy extends AppCompatActivity {
+public class Act_CostList extends AppCompatActivity {
+    Context context=this;
     UserInfo userInfo;
-    Utils_user utils_user=new Utils_user(this);
-    ListView payList;
-    List<Tuition> tuitions=new ArrayList<>();
-    TuitionAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pay_for_study);
-        userInfo=utils_user.getUserInfo();
+        setContentView(R.layout.activity_cost_list);
+        userInfo=(new Utils_user(context)).getUserInfo();
         initToolbar();
-        initView();
-        getPaynum();
+        getCostList();
     }
     public void initToolbar(){
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
@@ -58,12 +49,8 @@ public class Act_PayForStudy extends AppCompatActivity {
             }
         });
     }
-    public void initView(){
-        payList=(ListView)findViewById(R.id.payList);
-        adapter=new TuitionAdapter(tuitions,this);
-        payList.setAdapter(adapter);
-    }
-    public void getPaynum(){//获取学费数据
+
+    public void getCostList(){
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         StringRequest stringRequest=new StringRequest(Request.Method.POST, mUrl.gridUrl, new Response.Listener<String>() {
             @Override
@@ -74,16 +61,8 @@ public class Act_PayForStudy extends AppCompatActivity {
                     if(jsonObject.getString(mUrl.retCode).equals("00")){
                         JSONArray jsonArray=jsonObject.getJSONArray(mUrl.retData);
                         for(int i=0;i<jsonArray.length();i++){
-                            JSONObject tuitionObject=jsonArray.getJSONObject(i);
-                            Tuition tuition=new Tuition();
-                            tuition.setTime(tuitionObject.getString("PERIOD_NAME"));
-                            tuition.setName(tuitionObject.getString("ENTRY_NAME"));
-                            tuition.setYingjiao(tuitionObject.getString("AMOUNT_YS"));
-                            tuition.setShijiao(tuitionObject.getString("AMOUNT_SS"));
-                            tuition.setQianfei(tuitionObject.getString("AMOUNT_QF"));
-                            tuitions.add(tuition);
+
                         }
-                        adapter.notifyDataSetChanged();
                     }else{
                         Toast.makeText(context,jsonObject.getString(mUrl.retMessage),Toast.LENGTH_SHORT).show();
                     }
@@ -94,20 +73,22 @@ public class Act_PayForStudy extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context,"请检查网络设置",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"请检测网络连接",Toast.LENGTH_SHORT).show();
             }
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
+                UserInfo userInfo= (new Utils_user(context)).getUserInfo();
                 Map<String,String> params=new HashMap<>();
-                params.put("infoId","21");
-                params.put("card_id",userInfo.getIdCard());
+                params.put("infoId","18");
                 params.put("role",userInfo.getRole());
+                params.put("card_id",userInfo.getIdCard());
+                params.put("name",userInfo.getName());
+                params.put("date","2015-11-22");
                 return params;
             }
         };
         requestQueue.add(stringRequest);
         requestQueue.start();
     }
-    Context context=this;
 }

@@ -16,9 +16,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.hnxind.CrpSystem.Act_CrpSystem;
 import com.hnxind.model.Grid;
 import com.hnxind.model.mUrl;
 import com.hnxind.rollManager.Act_rollManager;
+import com.hnxind.schoolCard.Act_SchoolCard;
 
 import java.util.List;
 
@@ -51,7 +53,6 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.mViewHolder> {
             @Override
             public void onClick(View v) {
                 openGrid(grid.getGridId());
-                Toast.makeText(context,grid.getGridName(),Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -82,6 +83,21 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.mViewHolder> {
         switch (gridid){
             case "14"://学籍管理
                 intent=new Intent(context,Act_rollManager.class);
+                break;
+            case "19"://CRP系统
+                intent=new Intent(context,Act_CrpSystem.class);
+                break;
+            case "18"://一卡通
+                intent=new Intent(context, Act_SchoolCard.class);
+                break;
+            case "17"://图书
+
+                break;
+            case "20"://信息卡
+
+                break;
+            case "22"://建议反馈
+
                 break;
         }
 

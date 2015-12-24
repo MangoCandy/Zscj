@@ -48,6 +48,7 @@
 
     //课表查询
     <LinearLayout
+        android:onClick="openKebiao"
         style="@style/roll_list_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

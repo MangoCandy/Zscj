@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.hnxind.rollManager.Act_Contacts.Act_Contacts;
+import com.hnxind.rollManager.Act_Kebiao.Act_Kebiao;
 import com.hnxind.rollManager.Act_PayForStudy.Act_PayForStudy;
 import com.hnxind.rollManager.Act_Score.Act_score;
 import com.hnxind.zscj.R;
@@ -45,6 +46,11 @@ public class Act_rollManager extends AppCompatActivity {
 
     public void openPay(View view) {//学费查询
         Intent intent=new Intent(this, Act_PayForStudy.class);
+        startActivity(intent);
+    }
+
+    public void openKebiao(View view) {//课表查询
+        Intent intent=new Intent(this, Act_Kebiao.class);
         startActivity(intent);
     }
 }

@@ -103,7 +103,7 @@ public class Act_Login extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 try {
-//                    progressDialog.dismiss();
+                    progressDialog.dismiss();
                     Log.i("asd",response);
                     JSONObject jsonObject=new JSONObject(response);
                     String code=jsonObject.getString(mUrl.retCode);
@@ -132,7 +132,7 @@ public class Act_Login extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
-                Log.i("asd",error+"");
+                Toast.makeText(context,"请检查网络连接...",Toast.LENGTH_SHORT).show();
             }
         }){
             @Override
@@ -179,10 +179,12 @@ public class Act_Login extends AppCompatActivity {
     }
     ProgressDialog progressDialog;
     public void initProgress(){
-        progressDialog=new ProgressDialog(this);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setCancelable(true);
-        progressDialog.setMessage("正在请求登陆...");
+        if(progressDialog==null){
+            progressDialog=new ProgressDialog(this);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setCancelable(false);
+            progressDialog.setMessage("正在请求登陆...");
+        }
         progressDialog.show();
     }
 }

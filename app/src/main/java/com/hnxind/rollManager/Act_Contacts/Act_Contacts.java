@@ -48,7 +48,6 @@ public class Act_Contacts extends AppCompatActivity {
         getContacts();
         initView();
         initToolbar();
-
     }
     //初始化toolbar
     public void initToolbar(){
@@ -109,7 +108,7 @@ public class Act_Contacts extends AppCompatActivity {
                 UserInfo userInfo= (new Utils_user(context)).getUserInfo();
                 Map<String,String> params=new HashMap<>();
                 params.put("infoId","28");
-                params.put("role","0");
+                params.put("role",userInfo.getRole());
                 params.put("students_number",userInfo.getStudentnum());
                 return params;
             }

@@ -44,8 +44,32 @@
             android:name="com.hnxind.rollManager.Act_Score.Act_score"
             android:label="成绩查询"
             android:theme="@style/mStyle" />
-        <activity android:name="com.hnxind.rollManager.Act_PayForStudy.Act_PayForStudy"
+        <activity
+            android:name="com.hnxind.rollManager.Act_PayForStudy.Act_PayForStudy"
             android:label="学费查询"
+            android:theme="@style/mStyle" />
+        <activity
+            android:name="com.hnxind.rollManager.Act_Kebiao.Act_Kebiao"
+            android:label="课表查询"
+            android:theme="@style/mStyle" />
+        <activity
+            android:name="com.hnxind.CrpSystem.Act_CrpSystem"
+            android:label="CRP系统"
+            android:theme="@style/mStyle" />
+        <activity
+            android:name="com.hnxind.CrpSystem.Act_Information.Act_Information"
+            android:label="信息查询"
+            android:theme="@style/mStyle" />
+        <activity
+            android:name="com.hnxind.utils.Act_WebView"
+            android:label="阅读"
+            android:theme="@style/mStyle" />
+        <activity
+            android:name="com.hnxind.schoolCard.Act_SchoolCard"
+            android:label="一卡通"
+            android:theme="@style/mStyle" />
+        <activity android:name="com.hnxind.schoolCard.Act_CostList.Act_CostList"
+            android:label="消费查询"
             android:theme="@style/mStyle"></activity>
     </application>
 
