@@ -3,7 +3,7 @@ package com.hnxind.model;
 /**
  * Created by Administrator on 2015/12/23.
  */
-public class Contact {
+public class Contact {//联系人
     String name;
     String num;
     String mclass;

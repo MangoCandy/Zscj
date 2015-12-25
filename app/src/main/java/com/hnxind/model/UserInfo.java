@@ -3,7 +3,7 @@ package com.hnxind.model;
 /**
  * Created by Administrator on 2015/12/22.
  */
-public class UserInfo {
+public class UserInfo {//用户信息
     public static String SpUser="zscjUser";//sp表名
 
     public static String IDCARD="card_id";

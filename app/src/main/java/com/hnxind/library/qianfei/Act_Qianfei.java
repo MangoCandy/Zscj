@@ -1,4 +1,4 @@
-package com.hnxind.rollManager.Act_Score;
+package com.hnxind.library.qianfei;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
@@ -28,18 +28,15 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Act_score extends AppCompatActivity {
+public class Act_Qianfei extends AppCompatActivity {
     Context context=this;
-    UserInfo userInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_score);
-        userInfo= (new Utils_user(context)).getUserInfo();
+        setContentView(R.layout.activity_qianfei);
         initToolbar();
-        getScore();
+        getqianfei();
     }
-
     //初始化toolbar
     public void initToolbar(){
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
@@ -52,7 +49,8 @@ public class Act_score extends AppCompatActivity {
             }
         });
     }
-    public void getScore(){
+
+    public void getqianfei(){
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         StringRequest stringRequest=new StringRequest(Request.Method.POST, mUrl.gridUrl, new Response.Listener<String>() {
             @Override
@@ -63,7 +61,6 @@ public class Act_score extends AppCompatActivity {
                     if(jsonObject.getString(mUrl.retCode).equals("00")){
                         JSONArray jsonArray=jsonObject.getJSONArray(mUrl.retData);
                         for(int i=0;i<jsonArray.length();i++){
-                            JSONObject conJson=jsonArray.getJSONObject(i);
 
                         }
                     }else{
@@ -77,16 +74,17 @@ public class Act_score extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(context,"请检测网络连接",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"请检测网络连接或尝试刷新",Toast.LENGTH_SHORT).show();
             }
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
+                UserInfo userInfo= (new Utils_user(context)).getUserInfo();
                 Map<String,String> params=new HashMap<>();
-                params.put("infoId","24");
+                params.put("infoId","26");
                 params.put("role",userInfo.getRole());
-                params.put("semester","201102");
                 params.put("students_number",userInfo.getStudentnum());
+                params.put("card_id",userInfo.getIdCard());
                 return params;
             }
         };

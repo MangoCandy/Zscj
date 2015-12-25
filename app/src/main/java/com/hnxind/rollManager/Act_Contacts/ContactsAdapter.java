@@ -73,6 +73,10 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.mViewH
 
         LinearLayout copy = (LinearLayout) view.findViewById(R.id.copy);
         copy.setOnClickListener(onClickListener);
+        if(Build.VERSION.SDK_INT<Build.VERSION_CODES.HONEYCOMB){
+            copy.setVisibility(View.GONE);//API低于11 取消复制功能
+        }
+
         contact_name.setText(contact.getName());
         alertDialog_builder = new AlertDialog.Builder(context);
         alertDialog_builder.setView(view);
@@ -97,13 +101,11 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.mViewH
                     context.startActivity(smsitent);
                     break;
                 case R.id.copy:
-                    ClipboardManager cmb = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                        ClipboardManager cmb = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
                         cmb.setPrimaryClip(ClipData.newPlainText(null,num));
-                    }else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                        cmb.setText(num);
+                        Toast.makeText(context,"号码已复制到剪切板",Toast.LENGTH_SHORT).show();
                     }
-                    Toast.makeText(context,"号码已复制到剪切板",Toast.LENGTH_SHORT).show();
                     break;
             }
         }

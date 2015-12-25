@@ -31,7 +31,7 @@
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:launchMode="singleTask"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/mStyle" />
         <activity
             android:name="com.hnxind.rollManager.Act_rollManager"
             android:label="@string/roll_manager"
@@ -68,9 +68,21 @@
             android:name="com.hnxind.schoolCard.Act_SchoolCard"
             android:label="一卡通"
             android:theme="@style/mStyle" />
-        <activity android:name="com.hnxind.schoolCard.Act_CostList.Act_CostList"
+        <activity
+            android:name="com.hnxind.schoolCard.Act_CostList.Act_CostList"
             android:label="消费查询"
-            android:theme="@style/mStyle"></activity>
+            android:theme="@style/mStyle" />
+        <activity
+            android:name="com.hnxind.personInfo.Act_PersonInfo"
+            android:label="个人信息"
+            android:theme="@style/mStyle" />
+        <activity
+            android:name="com.hnxind.library.Act_Library"
+            android:label="图书信息"
+            android:theme="@style/mStyle" />
+        <activity android:name="com.hnxind.library.qianfei.Act_Qianfei"
+            android:label="欠费查询"
+            android:theme="@style/mStyle" ></activity>
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.hnxind.rollManager.Act_Contacts;
 
 import android.content.Context;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -41,13 +42,14 @@ public class Act_Contacts extends AppCompatActivity {
     Context context=this;
     List<Contact> contacts=new ArrayList<Contact>();
     TextView className;//班级名
+    SwipeRefreshLayout swipeRefreshLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
-        getContacts();
         initView();
         initToolbar();
+        getContacts();
     }
     //初始化toolbar
     public void initToolbar(){
@@ -68,17 +70,27 @@ public class Act_Contacts extends AppCompatActivity {
         contactsView.setAdapter(contactsAdapter);
 
         className=(TextView)findViewById(R.id.classname);
+        swipeRefreshLayout=(SwipeRefreshLayout)findViewById(R.id.refresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getContacts();
+            }
+        });
     }
     //获取联系人
     public void getContacts(){
+        swipeRefreshLayout.setRefreshing(true);
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         StringRequest stringRequest=new StringRequest(Request.Method.POST, mUrl.gridUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
+                    swipeRefreshLayout.setRefreshing(false);
                     Log.i("asd",response);
                     JSONObject jsonObject=new JSONObject(response);
                     if(jsonObject.getString(mUrl.retCode).equals("00")){
+                        contacts.clear();
                         JSONArray jsonArray=jsonObject.getJSONArray(mUrl.retData);
                         for(int i=0;i<jsonArray.length();i++){
                             JSONObject conJson=jsonArray.getJSONObject(i);
@@ -100,6 +112,7 @@ public class Act_Contacts extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                swipeRefreshLayout.setRefreshing(false);
                 Toast.makeText(context,"请检测网络连接",Toast.LENGTH_SHORT).show();
             }
         }){

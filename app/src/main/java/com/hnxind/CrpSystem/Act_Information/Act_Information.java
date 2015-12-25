@@ -100,6 +100,7 @@ public class Act_Information extends AppCompatActivity {
         });
     }
     public void getinformation(final boolean isRefresh){//获取信息
+        swiperefreshWithLoadMore.setRefreshing(true);
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         StringRequest stringRequest=new StringRequest(Request.Method.POST, mUrl.gridUrl, new Response.Listener<String>() {
             @Override

@@ -3,6 +3,6 @@
     <style name="mStyle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
         <item name="android:statusBarColor">@color/colorPrimaryDark</item>
-
+        <item name="drawerArrowStyle">@style/AppTheme.DrawerArrowToggle</item>
     </style>
 </resources>

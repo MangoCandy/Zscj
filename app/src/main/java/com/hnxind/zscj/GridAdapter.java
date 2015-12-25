@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.hnxind.CrpSystem.Act_CrpSystem;
+import com.hnxind.library.Act_Library;
 import com.hnxind.model.Grid;
 import com.hnxind.model.mUrl;
 import com.hnxind.rollManager.Act_rollManager;
@@ -91,7 +92,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.mViewHolder> {
                 intent=new Intent(context, Act_SchoolCard.class);
                 break;
             case "17"://图书
-
+                intent=new Intent(context, Act_Library.class);
                 break;
             case "20"://信息卡
 

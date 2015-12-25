@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by Administrator on 2015/12/22.
  */
-public class Grid{
+public class Grid{//模块名
     public static String GRID_NAME="gridName";
     public static String GRID_PIC="gridPic";
     public static String GRID_ID="gridId";

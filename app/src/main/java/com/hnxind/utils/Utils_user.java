@@ -31,4 +31,11 @@ public class Utils_user {
         userInfo.setStudentnum(sharedPreferences.getString(UserInfo.STUDENT_NUM,""));
         return userInfo;
     }
+
+    public void clearUserInfo(){
+        SharedPreferences sharedPreferences=context.getSharedPreferences(UserInfo.SpUser,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.clear();
+        editor.commit();
+    }
 }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="mStyle" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="mStyle" parent="AppTheme.NoActionBar">
         <item name="android:windowTranslucentStatus">true</item>
+        <item name="drawerArrowStyle">@style/AppTheme.DrawerArrowToggle</item>
     </style>
     <style name="loginStyle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowTranslucentStatus">true</item>

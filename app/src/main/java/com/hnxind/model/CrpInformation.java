@@ -3,7 +3,7 @@ package com.hnxind.model;
 /**
  * Created by Administrator on 2015/12/24.
  */
-public class CrpInformation {
+public class CrpInformation {//CRP信息查询
     String id;
     String title;
     String content;

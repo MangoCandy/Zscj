@@ -2,6 +2,7 @@ package com.hnxind.utils;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.os.Build;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -80,10 +81,16 @@ public class SwiperefreshWithLoadMore extends SwipeRefreshLayout implements AbsL
     boolean isloading=false;
     public void setLoadingMore(boolean bool){
         isloading=bool;
-        if(bool){
-            listView.addFooterView(footview);
-        }else{
-            listView.removeFooterView(footview);
+        if(Build.VERSION.SDK_INT>Build.VERSION_CODES.HONEYCOMB){
+            if(bool){
+                if(listView.getFooterViewsCount()==0){
+                    listView.addFooterView(footview);
+                }
+            }else{
+                if(listView.getFooterViewsCount()>0){
+                    listView.removeFooterView(footview);
+                }
+            }
         }
     }
 

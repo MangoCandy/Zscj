@@ -1,4 +1,4 @@
-package com.hnxind.rollManager.Act_PayForStudy;
+package com.hnxind.personInfo;
 
 import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -17,8 +17,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.hnxind.model.Contact;
-import com.hnxind.model.Tuition;
+import com.hnxind.model.CrpInformation;
+import com.hnxind.model.StudentInfo;
 import com.hnxind.model.UserInfo;
 import com.hnxind.model.mUrl;
 import com.hnxind.utils.Utils_user;
@@ -28,27 +28,24 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class Act_PayForStudy extends AppCompatActivity {
+public class Act_PersonInfo extends AppCompatActivity {
+    Context context=this;
     UserInfo userInfo;
-    Utils_user utils_user=new Utils_user(this);
-    ListView payList;
-    List<Tuition> tuitions=new ArrayList<>();
-    TuitionAdapter adapter;
+    StudentInfo studentInfo;
     SwipeRefreshLayout swipeRefreshLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pay_for_study);
-        userInfo=utils_user.getUserInfo();
+        setContentView(R.layout.activity_person_info);
+        userInfo=(new Utils_user(this)).getUserInfo();
         initToolbar();
         initView();
-        getPaynum();
+        getInfo();
     }
+
     public void initToolbar(){
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -61,22 +58,18 @@ public class Act_PayForStudy extends AppCompatActivity {
         });
     }
     public void initView(){
-        payList=(ListView)findViewById(R.id.payList);
-        adapter=new TuitionAdapter(tuitions,this);
-        payList.setAdapter(adapter);
-
         swipeRefreshLayout=(SwipeRefreshLayout)findViewById(R.id.refresh);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getPaynum();
+                getInfo();
             }
         });
     }
-    public void getPaynum(){//获取学费数据
+    public void getInfo(){
         swipeRefreshLayout.setRefreshing(true);
         RequestQueue requestQueue= Volley.newRequestQueue(this);
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, mUrl.gridUrl, new Response.Listener<String>() {
+        final StringRequest stringRequest=new StringRequest(Request.Method.POST, mUrl.gridUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -84,19 +77,21 @@ public class Act_PayForStudy extends AppCompatActivity {
                     Log.i("asd",response);
                     JSONObject jsonObject=new JSONObject(response);
                     if(jsonObject.getString(mUrl.retCode).equals("00")){
-                        tuitions.clear();
-                        JSONArray jsonArray=jsonObject.getJSONArray(mUrl.retData);
-                        for(int i=0;i<jsonArray.length();i++){
-                            JSONObject tuitionObject=jsonArray.getJSONObject(i);
-                            Tuition tuition=new Tuition();
-                            tuition.setTime(tuitionObject.getString("PERIOD_NAME"));
-                            tuition.setName(tuitionObject.getString("ENTRY_NAME"));
-                            tuition.setYingjiao(tuitionObject.getString("AMOUNT_YS"));
-                            tuition.setShijiao(tuitionObject.getString("AMOUNT_SS"));
-                            tuition.setQianfei(tuitionObject.getString("AMOUNT_QF"));
-                            tuitions.add(tuition);
-                        }
-                        adapter.notifyDataSetChanged();
+                        jsonObject=jsonObject.getJSONObject(mUrl.retData);
+                        studentInfo=new StudentInfo();
+                        studentInfo.setIdCard(jsonObject.getString("card_id_no"));
+                        studentInfo.setClasses(jsonObject.getString("class"));
+                        studentInfo.setName(jsonObject.getString("name"));
+                        studentInfo.setTel(jsonObject.getString("mobile"));
+                        studentInfo.setStudent_no(jsonObject.getString("students_no"));
+                        studentInfo.setStatus(jsonObject.getString("status"));
+                        studentInfo.setSchool(jsonObject.getString("campus"));
+                        studentInfo.setMajor(jsonObject.getString("major"));
+                        studentInfo.setGrade(jsonObject.getString("grade"));
+                        studentInfo.setType(jsonObject.getString("type"));
+                        studentInfo.setEmail(jsonObject.getString("email"));
+                        studentInfo.setDept(jsonObject.getString("dept"));
+                        setView();
                     }else{
                         Toast.makeText(context,jsonObject.getString(mUrl.retMessage),Toast.LENGTH_SHORT).show();
                     }
@@ -108,20 +103,36 @@ public class Act_PayForStudy extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 swipeRefreshLayout.setRefreshing(false);
-                Toast.makeText(context,"请检查网络设置",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"请检查网络设置或尝试刷新",Toast.LENGTH_SHORT).show();
             }
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params=new HashMap<>();
-                params.put("infoId","21");
-                params.put("card_id",userInfo.getIdCard());
+                params.put("infoId","14");
+                params.put("students_number",userInfo.getStudentnum());
                 params.put("role",userInfo.getRole());
+                params.put("card_id",userInfo.getIdCard());
+                params.put("name",userInfo.getName());
                 return params;
             }
         };
         requestQueue.add(stringRequest);
         requestQueue.start();
     }
-    Context context=this;
+
+    public void setView(){
+        ((TextView)findViewById(R.id.name)).setText(studentInfo.getName());
+        ((TextView)findViewById(R.id.idcard)).setText(studentInfo.getIdCard());
+        ((TextView)findViewById(R.id.status)).setText(studentInfo.getStatus());
+        ((TextView)findViewById(R.id.type)).setText(studentInfo.getType());
+        ((TextView)findViewById(R.id.school)).setText(studentInfo.getSchool());
+        ((TextView)findViewById(R.id.grade)).setText(studentInfo.getGrade());
+        ((TextView)findViewById(R.id.major)).setText(studentInfo.getMajor());
+        ((TextView)findViewById(R.id.dept)).setText(studentInfo.getDept());
+        ((TextView)findViewById(R.id.email)).setText(studentInfo.getEmail());
+        ((TextView)findViewById(R.id.tel)).setText(studentInfo.getTel());
+        ((TextView)findViewById(R.id.studentNo)).setText(studentInfo.getStudent_no());
+        ((TextView)findViewById(R.id.clas)).setText(studentInfo.getClasses());
+    }
 }
