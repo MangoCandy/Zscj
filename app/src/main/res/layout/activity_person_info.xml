@@ -1,26 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    tools:context="com.hnxind.personInfo.Act_PersonInfo">
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:background="@color/colorPrimary"
-        app:titleTextColor="#fff"
+    tools:context="com.hnxind.personInfo.Act_PersonInfo"
+    >
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
         android:fitsSystemWindows="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        >
+        <android.support.design.widget.CollapsingToolbarLayout
+            app:title="个人信息"
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            android:fitsSystemWindows="true">
+            <ImageView
+                app:layout_collapseMode="parallax"
+                android:padding="20dp"
+                android:src="@mipmap/logo"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:layout_collapseMode="pin" />
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
     <android.support.v4.widget.SwipeRefreshLayout
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:id="@+id/refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ScrollView
+        <android.support.v4.widget.NestedScrollView
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <LinearLayout
+                android:padding="20dp"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -230,6 +257,7 @@
                         android:layout_height="wrap_content" />
                 </LinearLayout>
             </LinearLayout>
-        </ScrollView>
+        </android.support.v4.widget.NestedScrollView>
     </android.support.v4.widget.SwipeRefreshLayout>
-</LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

@@ -32,8 +32,8 @@ public class Utils_user {
         return userInfo;
     }
 
-    public void clearUserInfo(){
-        SharedPreferences sharedPreferences=context.getSharedPreferences(UserInfo.SpUser,Context.MODE_PRIVATE);
+    public void clearUserInfo(){//清楚用户登陆信息 写错地方 懒得改了
+        SharedPreferences sharedPreferences=context.getSharedPreferences("zscj",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=sharedPreferences.edit();
         editor.clear();
         editor.commit();

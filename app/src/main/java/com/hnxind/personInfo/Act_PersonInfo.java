@@ -1,11 +1,14 @@
 package com.hnxind.personInfo;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,8 +48,14 @@ public class Act_PersonInfo extends AppCompatActivity {
         initView();
         getInfo();
     }
-
+    CollapsingToolbarLayout toolbarLayout;
     public void initToolbar(){
+        toolbarLayout=(CollapsingToolbarLayout)findViewById(R.id.toolbar_layout);
+        toolbarLayout.setExpandedTitleColor(Color.WHITE);
+        toolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
+        toolbarLayout.setCollapsedTitleTextColor(Color.TRANSPARENT);
+        toolbarLayout.setTitleEnabled(false);
+
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.mipmap.iconfont_back);
@@ -122,6 +131,7 @@ public class Act_PersonInfo extends AppCompatActivity {
     }
 
     public void setView(){
+        toolbarLayout.setTitle(studentInfo.getName());
         ((TextView)findViewById(R.id.name)).setText(studentInfo.getName());
         ((TextView)findViewById(R.id.idcard)).setText(studentInfo.getIdCard());
         ((TextView)findViewById(R.id.status)).setText(studentInfo.getStatus());

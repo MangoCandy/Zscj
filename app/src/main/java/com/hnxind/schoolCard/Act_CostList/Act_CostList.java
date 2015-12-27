@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
@@ -30,10 +31,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.SimpleFormatter;
 
 public class Act_CostList extends AppCompatActivity {
     Context context=this;
@@ -86,6 +92,7 @@ public class Act_CostList extends AppCompatActivity {
     }
 
     public void getCostList(final String date){
+        listView.removeHeaderView(LayoutInflater.from(context).inflate(R.layout.foot_layout,null));
         swipeRefreshLayout.setRefreshing(true);
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         StringRequest stringRequest=new StringRequest(Request.Method.POST, mUrl.gridUrl, new Response.Listener<String>() {
@@ -111,6 +118,7 @@ public class Act_CostList extends AppCompatActivity {
                                 costList.add(cost);
                             }
                         }else{
+                            listView.addHeaderView(LayoutInflater.from(context).inflate(R.layout.foot_layout,null));
                             Toast.makeText(context,"当天无消费记录",Toast.LENGTH_SHORT).show();
                         }
                         adapter.notifyDataSetChanged();
@@ -150,7 +158,21 @@ public class Act_CostList extends AppCompatActivity {
         dateLayout.setVisibility(View.GONE);
         listLayout.setVisibility(View.VISIBLE);
         date=datePicker.getYear()+"-"+(datePicker.getMonth()+1)+"-"+(datePicker.getDayOfMonth());
-        Log.i("asd",date);
+        Log.i("asds",date);
+        SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date d=formatter.parse(date);
+            Calendar calendar=Calendar.getInstance();
+            calendar.setTime(d);
+            calendar.add(Calendar.DAY_OF_MONTH,1);
+            Log.i("asd",d+"");
+            d=calendar.getTime();
+            date=formatter.format(d);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Log.i("asdq",date);
         getCostList(date);
 
 

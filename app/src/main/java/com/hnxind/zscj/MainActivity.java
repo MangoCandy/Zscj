@@ -53,14 +53,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         initView();
         initToolBar();
     }
-
+    DrawerLayout drawer;
     public void initToolBar(){
         Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
 //        toolbar.setNavigationIcon(R.mipmap.logo);
         setSupportActionBar(toolbar);
         toolbar.setMenu(null,null);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.action_settings, R.string.app_name);
         drawer.setDrawerListener(toggle);
@@ -96,6 +96,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        drawer.closeDrawers();
+
+//        drawer.closeDrawer(GravityCompat.START);
         int id=item.getItemId();
         switch (id){
             case R.id.info:
@@ -120,9 +123,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 builder.show();
                 break;
         }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
