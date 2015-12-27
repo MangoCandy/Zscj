@@ -117,7 +117,7 @@ public class Act_CostList extends AppCompatActivity {
                                 costList.add(cost);
                             }
                         }else{
-                            Toast.makeText(context,"当天无消费记录",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context,"未查到消费记录，请尝试刷新或选择其他日期",Toast.LENGTH_SHORT).show();
                         }
                         adapter.notifyDataSetChanged();
                     }else{
