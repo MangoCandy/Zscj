@@ -92,7 +92,6 @@ public class Act_CostList extends AppCompatActivity {
     }
 
     public void getCostList(final String date){
-        listView.removeHeaderView(LayoutInflater.from(context).inflate(R.layout.foot_layout,null));
         swipeRefreshLayout.setRefreshing(true);
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         StringRequest stringRequest=new StringRequest(Request.Method.POST, mUrl.gridUrl, new Response.Listener<String>() {
@@ -118,7 +117,6 @@ public class Act_CostList extends AppCompatActivity {
                                 costList.add(cost);
                             }
                         }else{
-                            listView.addHeaderView(LayoutInflater.from(context).inflate(R.layout.foot_layout,null));
                             Toast.makeText(context,"当天无消费记录",Toast.LENGTH_SHORT).show();
                         }
                         adapter.notifyDataSetChanged();
