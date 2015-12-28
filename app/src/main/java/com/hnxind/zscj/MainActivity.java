@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     RecyclerView gridView;
     GridAdapter gridAdapter;
+    NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,13 +71,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView=(NavigationView)findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
+
+        navigationView=(NavigationView)findViewById(R.id.navigationView);
     }
     public void initView(){
         gridAdapter=new GridAdapter(grids);
         gridView=(RecyclerView) findViewById(R.id.gridView);
         gridView.setLayoutManager(new GridLayoutManager(this,3));
         gridView.setAdapter(gridAdapter);
-
     }
 
     //jsonArray转grids（模块信息）
@@ -97,33 +101,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         drawer.closeDrawers();
-
-//        drawer.closeDrawer(GravityCompat.START);
-        int id=item.getItemId();
-        switch (id){
-            case R.id.info:
-                Intent intent=new Intent(context, Act_PersonInfo.class);
-                startActivity(intent);
-                break;
-            case R.id.loginout:
-                AlertDialog.Builder builder=new AlertDialog.Builder(this);
-                builder.setMessage("确认退出登录");
-                builder.setCustomTitle(LayoutInflater.from(this).inflate(R.layout.nav_header,null));
-                builder.setNegativeButton("取消",null);
-                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Utils_user utils_user=new Utils_user(context);
-                        utils_user.clearUserInfo();
-                        Intent intent=new Intent(context,Act_Login.class);
+        final int id=item.getItemId();
+        Handler handler=new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                switch (id){
+                    case R.id.info:
+                        Intent intent=new Intent(context, Act_PersonInfo.class);
                         startActivity(intent);
-                        finish();
-                    }
-                });
-                builder.show();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
+                        break;
+                    case R.id.loginout:
+                        AlertDialog.Builder builder=new AlertDialog.Builder(context);
+                        builder.setMessage("确认退出登录");
+                        builder.setCustomTitle(LayoutInflater.from(context).inflate(R.layout.nav_header,null));
+                        builder.setNegativeButton("取消",null);
+                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Utils_user utils_user=new Utils_user(context);
+                                utils_user.clearUserInfo();
+                                Intent intent=new Intent(context,Act_Login.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        });
+                        builder.show();
+                        break;
+                }
+            }
+        },300);
+        return true;
     }
 
     @Override

@@ -22,6 +22,7 @@ import com.hnxind.model.Grid;
 import com.hnxind.model.mUrl;
 import com.hnxind.rollManager.Act_rollManager;
 import com.hnxind.schoolCard.Act_SchoolCard;
+import com.hnxind.utils.Act_WebView;
 
 import java.util.List;
 
@@ -95,13 +96,19 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.mViewHolder> {
                 intent=new Intent(context, Act_Library.class);
                 break;
             case "20"://信息卡
-
+                intent=new Intent(context, Act_WebView.class);
+                intent.putExtra("url","http://wap.10010.com/t/home.htm");
+                intent.putExtra("title","联通");
                 break;
             case "22"://建议反馈
 
                 break;
         }
 
-        context.startActivity(intent);
+        if(intent!=null){
+            context.startActivity(intent);
+        }else {
+            Toast.makeText(context,"功能正在开发",Toast.LENGTH_SHORT).show();
+        }
     }
 }

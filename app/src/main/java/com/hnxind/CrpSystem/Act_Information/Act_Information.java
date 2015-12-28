@@ -63,7 +63,7 @@ public class Act_Information extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                openRead(crpInformations.get(position).getContent());
+                openRead(crpInformations.get(position).getContent(),crpInformations.get(position).getTitle());
             }
         });
 
@@ -83,9 +83,10 @@ public class Act_Information extends AppCompatActivity {
 
     }
 
-    public void openRead(String content){
+    public void openRead(String content,String title){
         Intent intent=new Intent(context, Act_WebView.class);
         intent.putExtra("content",content);
+        intent.putExtra("title",title);
         startActivity(intent);
     }
     public void initToolbar(){

@@ -30,6 +30,10 @@
         <item name="android:textSize">18dp</item>
         <item name="android:textColor">#161616</item>
     </style>
+    <style name="qianfeistyle">//欠费布局
+        <item name="android:padding">20dp</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
     <style name="cost_text_style">
         <item name="android:layout_margin">10dp</item>
         <item name="android:textSize">16dp</item>

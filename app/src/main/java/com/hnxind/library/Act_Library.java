@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.hnxind.library.jieyueHistory.Act_JieyueHistory;
 import com.hnxind.library.qianfei.Act_Qianfei;
 import com.hnxind.zscj.R;
 
@@ -33,6 +34,8 @@ public class Act_Library extends AppCompatActivity {
 
 
     public void openhistory(View view) {//借阅历史
+        Intent intent=new Intent(this, Act_JieyueHistory.class);
+        startActivity(intent);
     }
 
     public void openqianfei(View view) {//欠费查询
@@ -41,5 +44,7 @@ public class Act_Library extends AppCompatActivity {
     }
 
     public void openbook(View view) {//书籍信息
+        Intent intent=new Intent(this, Act_Book.class);
+        startActivity(intent);
     }
 }

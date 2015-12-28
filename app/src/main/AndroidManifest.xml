@@ -80,9 +80,18 @@
             android:name="com.hnxind.library.Act_Library"
             android:label="图书信息"
             android:theme="@style/mStyle" />
-        <activity android:name="com.hnxind.library.qianfei.Act_Qianfei"
+        <activity
+            android:name="com.hnxind.library.qianfei.Act_Qianfei"
             android:label="欠费查询"
-            android:theme="@style/mStyle" ></activity>
+            android:theme="@style/mStyle" />
+        <activity
+            android:name="com.hnxind.library.jieyueHistory.Act_JieyueHistory"
+            android:label="借阅历史"
+            android:theme="@style/mStyle" />
+        <activity android:name="com.hnxind.library.Act_Book"
+            android:label="书籍查询"
+            android:windowSoftInputMode="adjustNothing"
+            android:theme="@style/mStyle"></activity>
     </application>
 
 </manifest>

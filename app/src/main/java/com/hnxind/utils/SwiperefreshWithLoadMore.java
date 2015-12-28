@@ -37,6 +37,7 @@ public class SwiperefreshWithLoadMore extends SwipeRefreshLayout implements AbsL
         super(context, attrs);
         this.context=context;
         footview=LayoutInflater.from(context).inflate(R.layout.foot_layout,null);
+        footview.setOnClickListener(null);
         mTouchSlop= 200;
     }
 
@@ -66,6 +67,7 @@ public class SwiperefreshWithLoadMore extends SwipeRefreshLayout implements AbsL
             if(view instanceof ListView){
                 listView=(ListView)view;
                 listView.setOnScrollListener(this);
+                listView.setFooterDividersEnabled(false);
             }
         }
     }
