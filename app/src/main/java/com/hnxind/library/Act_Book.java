@@ -5,6 +5,8 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -41,7 +43,7 @@ import java.util.Map;
 public class Act_Book extends AppCompatActivity {
     Context context=this;
     List<Book> books=new ArrayList<>();
-    ListView listView;
+    RecyclerView listView;
     SwipeRefreshLayout swipeRefreshLayout;
     BookAdapter adapter;
 
@@ -77,8 +79,11 @@ public class Act_Book extends AppCompatActivity {
             }
         });
 
-        listView=(ListView) findViewById(R.id.listview);
+        listView=(RecyclerView) findViewById(R.id.listview);
         adapter=new BookAdapter(books,context);
+        LinearLayoutManager manager=new LinearLayoutManager(this);
+        manager.setStackFromEnd(false);
+        listView.setLayoutManager(manager);
         listView.setAdapter(adapter);
         swipeRefreshLayout=(SwipeRefreshLayout)findViewById(R.id.refresh);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -95,12 +100,12 @@ public class Act_Book extends AppCompatActivity {
         StringRequest stringRequest=new StringRequest(Request.Method.POST, mUrl.gridUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                books.clear();//首先清空资源
                 try {
                     swipeRefreshLayout.setRefreshing(false);
                     Log.i("asd",response);
                     JSONObject jsonObject=new JSONObject(response);
                     if(jsonObject.getString(mUrl.retCode).equals("00")){
-                        books.clear();//首先清空资源
                         JSONArray jsonArray=jsonObject.getJSONArray(mUrl.retData);
                         for(int i=0;i<jsonArray.length();i++){
                             jsonObject=jsonArray.getJSONObject(i);
@@ -110,10 +115,11 @@ public class Act_Book extends AppCompatActivity {
                             book.setPublisher("出版商："+jsonObject.getString(Book.PUBILSHER).replace("null","不详"));
                             books.add(book);
                         }
-                        adapter.notifyDataSetChanged();
                     }else{
                         Toast.makeText(context,jsonObject.getString(mUrl.retMessage),Toast.LENGTH_SHORT).show();
                     }
+                    adapter.notifyDataSetChanged();
+                    listView.scrollToPosition(0);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

@@ -85,7 +85,7 @@ public class Act_score extends AppCompatActivity {
                 Map<String,String> params=new HashMap<>();
                 params.put("infoId","24");
                 params.put("role",userInfo.getRole());
-                params.put("semester","201102");
+                params.put("semester","201402");
                 params.put("students_number",userInfo.getStudentnum());
                 return params;
             }
