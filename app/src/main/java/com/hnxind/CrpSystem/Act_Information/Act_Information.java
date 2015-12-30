@@ -121,7 +121,7 @@ public class Act_Information extends AppCompatActivity {
                             crpInformation.setTitle(object.getString("title"));
                             crpInformation.setContent(object.getString("content"));
                             crpInformation.setSend_name(object.getString("sender_name"));
-                            crpInformation.setCreate_date(object.getString("create_time"));
+                            crpInformation.setCreate_date(object.getString("create_time").substring(0,10));
                             crpInformations.add(crpInformation);
                         }
                         adapter.notifyDataSetChanged();

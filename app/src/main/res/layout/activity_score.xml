@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context="com.hnxind.rollManager.Act_Score.Act_score">
+    tools:context="com.hnxind.rollManager.Act_Score.Act_score"
+    android:background="#fff">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         app:titleTextColor="#fff"
@@ -19,6 +20,20 @@
         android:layout_height="wrap_content">
 
     </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Spinner
+            android:popupBackground="@drawable/spiner_backgroud"
+            android:id="@+id/spiner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <LinearLayout
+        android:background="#70c6c6c6"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"></LinearLayout>
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/refresh"
         android:layout_width="match_parent"

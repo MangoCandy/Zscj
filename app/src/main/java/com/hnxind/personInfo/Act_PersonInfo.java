@@ -98,7 +98,7 @@ public class Act_PersonInfo extends AppCompatActivity {
                         studentInfo.setMajor(jsonObject.getString("major"));
                         studentInfo.setGrade(jsonObject.getString("grade"));
                         studentInfo.setType(jsonObject.getString("type"));
-                        studentInfo.setEmail(jsonObject.getString("email"));
+                        studentInfo.setEmail(jsonObject.getString("email").replace("null",""));
                         studentInfo.setDept(jsonObject.getString("dept"));
                         setView();
                     }else{

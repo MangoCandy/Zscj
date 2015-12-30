@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -46,7 +47,7 @@ public class Act_Book extends AppCompatActivity {
     RecyclerView listView;
     SwipeRefreshLayout swipeRefreshLayout;
     BookAdapter adapter;
-
+    String type="01";//搜索依据
     EditText editText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +96,10 @@ public class Act_Book extends AppCompatActivity {
     }
     public void getDate(View view){
         final String t=editText.getText().toString();
+        InputMethodManager imm=(InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+        if(imm!=null){
+            imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(),0);
+        }
         swipeRefreshLayout.setRefreshing(true);
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         StringRequest stringRequest=new StringRequest(Request.Method.POST, mUrl.gridUrl, new Response.Listener<String>() {
@@ -140,7 +145,7 @@ public class Act_Book extends AppCompatActivity {
                 params.put("students_number",userInfo.getStudentnum());
                 params.put("card_id",userInfo.getIdCard());
                 params.put("keyword",t);
-                params.put("seach_type","01");
+                params.put("seach_type",type);
                 return params;
             }
         };

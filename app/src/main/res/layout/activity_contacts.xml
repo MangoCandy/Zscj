@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context="com.hnxind.rollManager.Act_Contacts.Act_Contacts">
+    tools:context="com.hnxind.rollManager.Act_Contacts.Act_Contacts"
+    android:background="#fff">
     <android.support.v7.widget.Toolbar
         android:fitsSystemWindows="true"
         app:titleTextColor="#fff"

@@ -3,9 +3,11 @@ package com.hnxind.rollManager.Act_Kebiao;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.menu.ExpandedMenuView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ExpandableListView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -15,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.hnxind.model.Kebiao;
 import com.hnxind.model.Tuition;
 import com.hnxind.model.UserInfo;
 import com.hnxind.model.mUrl;
@@ -25,21 +28,39 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Act_Kebiao extends AppCompatActivity {
     Context context=this;
     UserInfo userInfo;
+    String date;
+    ExpandableListView expandableListView;
+    Map<String,List<Kebiao>> kebiaoMap=new HashMap<String,List<Kebiao>>();
+    String[] parent=new String[7];
+    KebiaoAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kebiao);
         userInfo=(new Utils_user(context)).getUserInfo();
         initToolbar();
+        initView();
+        getDate();
         getKebiao();
     }
-
+    public void initView(){
+        expandableListView=(ExpandableListView)findViewById(R.id.kebiaoView);
+        adapter=new KebiaoAdapter(kebiaoMap,parent);
+        expandableListView.setAdapter(adapter);
+    }
     public void initToolbar(){
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -51,7 +72,13 @@ public class Act_Kebiao extends AppCompatActivity {
             }
         });
     }
-
+    public void getDate(){
+        Calendar calendar=Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY);
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+        calendar.getTime();
+        date=format.format(calendar.getTime());
+    }
     public void getKebiao(){
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         StringRequest stringRequest=new StringRequest(Request.Method.POST, mUrl.gridUrl, new Response.Listener<String>() {
@@ -61,7 +88,32 @@ public class Act_Kebiao extends AppCompatActivity {
                     JSONObject jsonObject=new JSONObject(response);
                     if(jsonObject.getString(mUrl.retCode).equals("00")){
                         JSONObject jsonObject1=jsonObject.getJSONObject(mUrl.retData);
-                        Log.i("asd",jsonObject1+"");
+                        JSONArray jsonArray=jsonObject1.names();
+                        for(int i=0;i<jsonArray.length();i++){
+                            JSONArray jsonArray1=jsonObject1.getJSONArray(jsonArray.getString(i));
+                            List<Kebiao> kebiaos=new ArrayList<>();
+                            String xq="";
+                            for(int s=0;s<jsonArray1.length();s++){
+                                JSONObject object=jsonArray1.getJSONObject(s);
+                                Kebiao kebiao=new Kebiao();
+                                kebiao.setKtmc(object.optString(Kebiao.KTMC));
+                                kebiao.setSjd(object.optString(Kebiao.SJD));
+                                kebiao.setTeacher(object.optString(Kebiao.TEACHER));
+                                kebiao.setXq(object.optString(Kebiao.XQ));
+                                kebiao.setZs(object.optString(Kebiao.ZS));
+                                kebiao.setKcmc(object.optString(kebiao.KCMC));
+                                kebiaos.add(kebiao);
+                                Log.i("asd",object+"we");
+                                if(kebiao.getXq()!=null&&!kebiao.getXq().equals("")){
+                                    xq=kebiao.getXq();
+                                }
+                            }
+                            parent[i]=jsonArray.getString(i)+getXq(jsonArray.getString(i));
+                            kebiaoMap.put(parent[i],kebiaos);
+                        }
+                        Arrays.sort(parent);
+                        Log.i("asd",kebiaoMap.size()+"we");
+                        adapter.notifyDataSetChanged();
                     }else{
                         Toast.makeText(context,jsonObject.getString(mUrl.retMessage),Toast.LENGTH_SHORT).show();
                     }
@@ -81,11 +133,30 @@ public class Act_Kebiao extends AppCompatActivity {
                 params.put("infoId","30");
                 params.put("role",userInfo.getRole());
                 params.put("students_number",userInfo.getStudentnum());
-                params.put("date_time","2015-12-04");
+                params.put("date_time",date);
                 return params;
             }
         };
         requestQueue.add(stringRequest);
         requestQueue.start();
+    }
+
+    public String getXq(String date){
+        Calendar calendar=Calendar.getInstance();
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            calendar.setTime(format.parse(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String xq=calendar.get(Calendar.DAY_OF_WEEK)-1+"";
+        xq=xq.replace("1","一")
+                .replace("2","二")
+                .replace("3","三")
+                .replace("4","四")
+                .replace("5","五")
+                .replace("6","六")
+                .replace("0","天");
+        return "  星期："+xq;
     }
 }

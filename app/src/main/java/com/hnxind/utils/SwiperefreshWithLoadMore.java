@@ -58,14 +58,17 @@ public class SwiperefreshWithLoadMore extends SwipeRefreshLayout implements AbsL
     }
 
     ListView listView;
+    View v;
     int my=0;
     int y=0;
     int mTouchSlop=0;
     public void getListview(){
         for(int i=0;i<this.getChildCount();i++){
             View view=getChildAt(i);
+            v=view;
             if(view instanceof ListView){
-                listView=(ListView)view;
+                listView=(ListView) view;
+                listView.addFooterView(footview);
                 listView.setOnScrollListener(this);
                 listView.setFooterDividersEnabled(false);
             }
@@ -83,16 +86,11 @@ public class SwiperefreshWithLoadMore extends SwipeRefreshLayout implements AbsL
     boolean isloading=false;
     public void setLoadingMore(boolean bool){
         isloading=bool;
-        if(Build.VERSION.SDK_INT>Build.VERSION_CODES.HONEYCOMB){
-            if(bool){
-                if(listView.getFooterViewsCount()==0){
-                    listView.addFooterView(footview);
-                }
-            }else{
-                if(listView.getFooterViewsCount()>0){
-                    listView.removeFooterView(footview);
-                }
-            }
+        setRefreshing(bool);
+        if(bool){
+            footview.setVisibility(VISIBLE);
+        }else {
+            footview.setVisibility(GONE);
         }
     }
 
@@ -103,8 +101,8 @@ public class SwiperefreshWithLoadMore extends SwipeRefreshLayout implements AbsL
             onLoadListener1=onLoadListener;
         }else{
             this.onLoadListener=null;
-            if(listView.getFooterViewsCount()==0){
-                listView.addFooterView(footview);
+            if(footview.getVisibility()==GONE){
+                footview.setVisibility(VISIBLE);
             }
             ((TextView)footview.findViewById(R.id.text_more)).setText("没有更多内容了哦");
         }

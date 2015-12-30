@@ -59,6 +59,8 @@ public class Act_CostList extends AppCompatActivity {
         userInfo=(new Utils_user(context)).getUserInfo();
         initToolbar();
         initView();
+
+        confirm(null);
     }
 
     public void initView(){
