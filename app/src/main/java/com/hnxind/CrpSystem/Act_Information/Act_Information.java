@@ -140,7 +140,7 @@ public class Act_Information extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 swiperefreshWithLoadMore.setRefreshing(false);
                 swiperefreshWithLoadMore.setLoadingMore(false);
-                Toast.makeText(context,"请检查网络设置",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"请检测网络连接或尝试刷新",Toast.LENGTH_SHORT).show();
             }
         }){
             @Override

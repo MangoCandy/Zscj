@@ -157,7 +157,7 @@ public class Act_Kebiao extends AppCompatActivity {
                 swipeRefreshLayout.setRefreshing(false);
                 kebiaoMap.clear();
                 adapter.notifyDataSetChanged();
-                Toast.makeText(context,"请检查网络设置",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"请检测网络连接或尝试刷新",Toast.LENGTH_SHORT).show();
             }
         }){
             @Override

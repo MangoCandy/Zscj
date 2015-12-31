@@ -135,7 +135,7 @@ public class Act_CostList extends AppCompatActivity {
                 swipeRefreshLayout.setRefreshing(false);
                 costList.clear();
                 adapter.notifyDataSetChanged();
-                Toast.makeText(context,"请检测网络连接",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"请检测网络连接或尝试刷新",Toast.LENGTH_SHORT).show();
             }
         }){
             @Override

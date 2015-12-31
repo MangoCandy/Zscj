@@ -9,14 +9,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            style="@style/score_text"
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
+            style="@style/score_text"
             android:id="@+id/author"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
+            style="@style/score_text"
             android:id="@+id/publisher"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

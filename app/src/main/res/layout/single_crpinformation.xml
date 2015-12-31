@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/normal_click">
     <TextView
+        android:textColor="#607d8b"
         android:layout_margin="10dp"
         android:textSize="17dp"
         android:text=""

@@ -8,7 +8,7 @@
     android:padding="20dp"
     >
     <TextView
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="#b0bec5"
         android:gravity="center_vertical"
         android:id="@+id/text_more"
         android:layout_width="wrap_content"

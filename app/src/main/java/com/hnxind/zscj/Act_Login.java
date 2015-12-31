@@ -132,7 +132,7 @@ public class Act_Login extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
-                Toast.makeText(context,"请检查网络连接...",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"请检查网络连接或重新请求登陆...",Toast.LENGTH_SHORT).show();
             }
         }){
             @Override

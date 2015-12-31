@@ -13,10 +13,14 @@
         android:fitsSystemWindows="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    <LinearLayout
-        android:orientation="vertical"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-    </LinearLayout>
+        <ExpandableListView
+            android:id="@+id/jieyueView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </ExpandableListView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

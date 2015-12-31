@@ -64,7 +64,7 @@ public class Act_Fankui extends AppCompatActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     progressDialog.dismiss();
-                    Toast.makeText(context,"请检查网络设置或重试",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,"请检测网络连接或尝试刷新",Toast.LENGTH_SHORT).show();
                 }
             });
             requestQueue.add(stringRequest);

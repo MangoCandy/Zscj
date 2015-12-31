@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context="com.hnxind.fankui.Act_Fankui">
+    tools:context="com.hnxind.fankui.Act_Fankui"
+    android:gravity="center_horizontal">
     <android.support.v7.widget.Toolbar
         android:fitsSystemWindows="true"
         android:id="@+id/toolbar"
@@ -29,12 +30,13 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:maxLines="15"/>
-        <android.support.design.widget.FloatingActionButton
-            android:onClick="post"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/login_btn"
-            android:src="@mipmap/iconfont_send"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
     </LinearLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:onClick="post"
+        android:layout_marginTop="20dp"
+        android:paddingBottom="10dp"
+        android:background="@drawable/login_btn"
+        android:src="@mipmap/iconfont_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </LinearLayout>
