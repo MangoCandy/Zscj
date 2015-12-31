@@ -127,9 +127,9 @@ public class Act_Qianfei extends AppCompatActivity {
     public void setView(Qianfei qianfei){
         ((TextView)findViewById(R.id.card_start)).setText(qianfei.getCard_start_date());
         ((TextView)findViewById(R.id.card_due)).setText(qianfei.getCard_due_date());
-        ((TextView)findViewById(R.id.qianfei_text)).setText(qianfei.getDebt());
-        ((TextView)findViewById(R.id.kj_text)).setText(qianfei.getKj());
-        ((TextView)findViewById(R.id.yj_text)).setText((qianfei.getYj().replace("null","0")));
+        ((TextView)findViewById(R.id.qianfei_text)).setText(qianfei.getDebt()+"元");
+        ((TextView)findViewById(R.id.kj_text)).setText(qianfei.getKj()+"本");
+        ((TextView)findViewById(R.id.yj_text)).setText((qianfei.getYj().replace("null","0"))+"本");
 
     }
 }

@@ -1,13 +1,17 @@
 package com.hnxind.rollManager.Act_Kebiao;
 
 import android.content.Context;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.view.menu.ExpandedMenuView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -46,6 +50,9 @@ public class Act_Kebiao extends AppCompatActivity {
     Map<String,List<Kebiao>> kebiaoMap=new HashMap<String,List<Kebiao>>();
     String[] parent=new String[7];
     KebiaoAdapter adapter;
+    Spinner spinner;
+    String[] types=new String[]{"上周课表","本周课表","下周课表"};
+    SwipeRefreshLayout swipeRefreshLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,10 +60,32 @@ public class Act_Kebiao extends AppCompatActivity {
         userInfo=(new Utils_user(context)).getUserInfo();
         initToolbar();
         initView();
-        getDate();
-        getKebiao();
     }
     public void initView(){
+        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.refresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getKebiao();
+            }
+        });
+
+        spinner=(Spinner)findViewById(R.id.spiner);
+        spinner.setAdapter(new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,types));
+        spinner.setSelection(1);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                getDate(position);
+                getKebiao();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         expandableListView=(ExpandableListView)findViewById(R.id.kebiaoView);
         adapter=new KebiaoAdapter(kebiaoMap,parent);
         expandableListView.setAdapter(adapter);
@@ -72,19 +101,25 @@ public class Act_Kebiao extends AppCompatActivity {
             }
         });
     }
-    public void getDate(){
+    public void getDate(int type){
+        int i=0;
         Calendar calendar=Calendar.getInstance();
         calendar.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY);
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
-        calendar.getTime();
+        i=type-1;
+        calendar.add(Calendar.WEEK_OF_YEAR,i);
         date=format.format(calendar.getTime());
     }
     public void getKebiao(){
+        swipeRefreshLayout.setRefreshing(true);
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         StringRequest stringRequest=new StringRequest(Request.Method.POST, mUrl.gridUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
+                    swipeRefreshLayout.setRefreshing(false);
+                    Log.i("asd",response);
+                    kebiaoMap.clear();
                     JSONObject jsonObject=new JSONObject(response);
                     if(jsonObject.getString(mUrl.retCode).equals("00")){
                         JSONObject jsonObject1=jsonObject.getJSONObject(mUrl.retData);
@@ -103,16 +138,11 @@ public class Act_Kebiao extends AppCompatActivity {
                                 kebiao.setZs(object.optString(Kebiao.ZS));
                                 kebiao.setKcmc(object.optString(kebiao.KCMC));
                                 kebiaos.add(kebiao);
-                                Log.i("asd",object+"we");
-                                if(kebiao.getXq()!=null&&!kebiao.getXq().equals("")){
-                                    xq=kebiao.getXq();
-                                }
                             }
                             parent[i]=jsonArray.getString(i)+getXq(jsonArray.getString(i));
                             kebiaoMap.put(parent[i],kebiaos);
                         }
                         Arrays.sort(parent);
-                        Log.i("asd",kebiaoMap.size()+"we");
                         adapter.notifyDataSetChanged();
                     }else{
                         Toast.makeText(context,jsonObject.getString(mUrl.retMessage),Toast.LENGTH_SHORT).show();
@@ -124,6 +154,9 @@ public class Act_Kebiao extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                swipeRefreshLayout.setRefreshing(false);
+                kebiaoMap.clear();
+                adapter.notifyDataSetChanged();
                 Toast.makeText(context,"请检查网络设置",Toast.LENGTH_SHORT).show();
             }
         }){

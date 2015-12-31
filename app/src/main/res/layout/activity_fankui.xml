@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="com.hnxind.fankui.Act_Fankui">
+    <android.support.v7.widget.Toolbar
+        android:fitsSystemWindows="true"
+        android:id="@+id/toolbar"
+        android:background="@color/colorPrimary"
+        app:titleTextColor="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/edittext"
+            android:padding="5dp"
+            android:background="@drawable/spiner_backgroud"
+            android:hint="请输入建议或意见"
+            android:textColorHint="#ce737371"
+            android:gravity="top"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:maxLines="15"/>
+        <android.support.design.widget.FloatingActionButton
+            android:onClick="post"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/login_btn"
+            android:src="@mipmap/iconfont_send"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>

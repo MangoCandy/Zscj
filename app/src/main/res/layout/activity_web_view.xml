@@ -13,6 +13,13 @@
         android:fitsSystemWindows="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+    <ProgressBar
+        android:progressDrawable="@drawable/progress"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:max="100"
+        android:id="@+id/progresbar"
+        android:layout_width="match_parent"
+        android:layout_height="3dp" />
     <WebView
         android:id="@+id/webview"
         android:layout_width="match_parent"

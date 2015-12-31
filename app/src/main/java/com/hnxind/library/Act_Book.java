@@ -13,8 +13,11 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +52,8 @@ public class Act_Book extends AppCompatActivity {
     BookAdapter adapter;
     String type="01";//搜索依据
     EditText editText;
+    Spinner spinner;
+    String[]types=new String[]{"书名","作者"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +74,21 @@ public class Act_Book extends AppCompatActivity {
         });
     }
     public void initView(){
+        spinner=(Spinner)findViewById(R.id.spiner);
+        spinner.setAdapter(new ArrayAdapter<String>(this,R.layout.single_spiner_types,types));
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                type="0"+(position+1);
+                Log.i("asd",type);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         editText=(EditText)findViewById(R.id.edit_book);
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -115,7 +135,7 @@ public class Act_Book extends AppCompatActivity {
                         for(int i=0;i<jsonArray.length();i++){
                             jsonObject=jsonArray.getJSONObject(i);
                             Book book=new Book();
-                            book.setTitle("书名："+jsonObject.getString(Book.TITLE));
+                            book.setTitle("书名：《"+jsonObject.getString(Book.TITLE)+"》");
                             book.setAuthor("作者："+jsonObject.getString(Book.AUTHOR));
                             book.setPublisher("出版商："+jsonObject.getString(Book.PUBILSHER).replace("null","不详"));
                             books.add(book);

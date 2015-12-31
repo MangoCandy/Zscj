@@ -21,9 +21,14 @@
                 android:padding="10dp"
                 app:layout_collapseMode="parallax"
                 android:layout_gravity="bottom"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <Spinner
+                    android:id="@+id/spiner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></Spinner>
                 <EditText
                     android:imeOptions="actionSearch"
                     android:id="@+id/edit_book"

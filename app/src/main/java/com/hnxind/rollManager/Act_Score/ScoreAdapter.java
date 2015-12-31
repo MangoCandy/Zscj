@@ -38,7 +38,6 @@ public class ScoreAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Score score= (Score) getItem(position);
-        Log.i("asd",score.getGrades());
         ViewHolder viewHolder;
         if(convertView==null){
             viewHolder=new ViewHolder();

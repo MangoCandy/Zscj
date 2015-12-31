@@ -33,10 +33,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        style="@style/score_text"
                         android:text="办卡日期："
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        style="@style/score_text"
                         android:id="@+id/card_start"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -50,10 +52,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        style="@style/score_text"
                         android:text="失效日期："
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        style="@style/score_text"
                         android:id="@+id/card_due"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -67,10 +71,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        style="@style/score_text"
                         android:text="欠费数额："
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        style="@style/score_text"
                         android:id="@+id/qianfei_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -84,10 +90,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        style="@style/score_text"
                         android:text="可借数量："
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        style="@style/score_text"
                         android:id="@+id/kj_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -101,10 +109,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        style="@style/score_text"
                         android:text="已借数量："
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        style="@style/score_text"
                         android:id="@+id/yj_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />

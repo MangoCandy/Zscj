@@ -14,8 +14,22 @@
         android:fitsSystemWindows="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    <ExpandableListView
-        android:id="@+id/kebiaoView"
+    <Spinner
+        android:popupBackground="@drawable/spiner_backgroud"
+        android:id="@+id/spiner"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></ExpandableListView>
+        android:layout_height="wrap_content"></Spinner>
+    <LinearLayout
+        android:background="#58b7b7b7"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"></LinearLayout>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ExpandableListView
+            android:id="@+id/kebiaoView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></ExpandableListView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

@@ -100,7 +100,6 @@ public class Act_CostList extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 try {
-                    swipeRefreshLayout.setRefreshing(false);
                     Log.i("asd",response);
                     JSONObject jsonObject=new JSONObject(response);
                     if(jsonObject.getString(mUrl.retCode).equals("00")){
@@ -122,6 +121,7 @@ public class Act_CostList extends AppCompatActivity {
                             Toast.makeText(context,"未查到消费记录，请尝试刷新或选择其他日期",Toast.LENGTH_SHORT).show();
                         }
                         adapter.notifyDataSetChanged();
+                        swipeRefreshLayout.setRefreshing(false);
                     }else{
                         Toast.makeText(context,jsonObject.getString(mUrl.retMessage),Toast.LENGTH_SHORT).show();
                     }

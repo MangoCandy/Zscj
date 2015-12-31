@@ -9,6 +9,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 import com.hnxind.zscj.R;
 
@@ -16,6 +17,7 @@ public class Act_WebView extends AppCompatActivity {
     WebView webView;
     String url;
     String title;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,11 +42,24 @@ public class Act_WebView extends AppCompatActivity {
     }
 
     public void initView(){
+        progressBar=(ProgressBar)findViewById(R.id.progresbar);
+        progressBar.setProgress(0);
+
         webView=(WebView)findViewById(R.id.webview);
         webView.getSettings().setDefaultTextEncodingName("UTF-8");
         webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.setWebChromeClient(new WebChromeClient(){
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                if(newProgress<100){
+                    progressBar.setVisibility(View.VISIBLE);
+                    progressBar.setProgress(newProgress);
+                }else{
+                    progressBar.setVisibility(View.GONE);
+                }
+                super.onProgressChanged(view, newProgress);
+            }
         });
         webView.setWebViewClient(new WebViewClient(){
             @Override

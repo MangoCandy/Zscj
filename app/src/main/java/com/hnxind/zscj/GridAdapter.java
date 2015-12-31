@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.hnxind.CrpSystem.Act_CrpSystem;
+import com.hnxind.fankui.Act_Fankui;
 import com.hnxind.library.Act_Library;
 import com.hnxind.model.Grid;
 import com.hnxind.model.mUrl;
@@ -101,7 +102,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.mViewHolder> {
                 intent.putExtra("title","联通");
                 break;
             case "22"://建议反馈
-
+                intent=new Intent(context,Act_Fankui.class);
                 break;
         }
 

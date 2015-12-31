@@ -88,10 +88,15 @@
             android:name="com.hnxind.library.jieyueHistory.Act_JieyueHistory"
             android:label="借阅历史"
             android:theme="@style/mStyle" />
-        <activity android:name="com.hnxind.library.Act_Book"
+        <activity
+            android:name="com.hnxind.library.Act_Book"
             android:label="书籍查询"
-            android:windowSoftInputMode="adjustNothing"
-            android:theme="@style/mStyle"></activity>
+            android:theme="@style/mStyle"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity android:name="com.hnxind.fankui.Act_Fankui"
+            android:label="建议反馈"
+            android:theme="@style/mStyle"
+            android:windowSoftInputMode="adjustNothing"></activity>
     </application>
 
 </manifest>
