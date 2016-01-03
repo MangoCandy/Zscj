@@ -17,6 +17,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.hnxind.model.mUrl;
+import com.hnxind.setting.Act_Setting;
+import com.hnxind.setting.Theme;
 import com.hnxind.zscj.R;
 
 public class Act_Fankui extends AppCompatActivity {
@@ -42,6 +44,7 @@ public class Act_Fankui extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        toolbar.setBackgroundColor(Theme.MainColor);
     }
 
     public void post(View view) {

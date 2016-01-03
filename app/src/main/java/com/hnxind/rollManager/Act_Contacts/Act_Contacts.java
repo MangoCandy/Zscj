@@ -22,6 +22,8 @@ import com.android.volley.toolbox.Volley;
 import com.hnxind.model.Contact;
 import com.hnxind.model.UserInfo;
 import com.hnxind.model.mUrl;
+import com.hnxind.setting.Act_Setting;
+import com.hnxind.setting.Theme;
 import com.hnxind.utils.Utils_user;
 import com.hnxind.zscj.R;
 
@@ -62,6 +64,7 @@ public class Act_Contacts extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        toolbar.setBackgroundColor(Theme.MainColor);
     }
     public void initView(){
         contactsView=(RecyclerView)findViewById(R.id.contacts_recycleview);

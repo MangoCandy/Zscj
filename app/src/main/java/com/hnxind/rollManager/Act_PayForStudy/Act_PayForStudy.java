@@ -21,6 +21,8 @@ import com.hnxind.model.Contact;
 import com.hnxind.model.Tuition;
 import com.hnxind.model.UserInfo;
 import com.hnxind.model.mUrl;
+import com.hnxind.setting.Act_Setting;
+import com.hnxind.setting.Theme;
 import com.hnxind.utils.Utils_user;
 import com.hnxind.zscj.R;
 
@@ -59,6 +61,7 @@ public class Act_PayForStudy extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        toolbar.setBackgroundColor(Theme.MainColor);
     }
     public void initView(){
         payList=(ListView)findViewById(R.id.payList);

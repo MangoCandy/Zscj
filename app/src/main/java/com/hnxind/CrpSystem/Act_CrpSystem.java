@@ -7,6 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.hnxind.CrpSystem.Act_Information.Act_Information;
+import com.hnxind.setting.Act_Setting;
+import com.hnxind.setting.Theme;
 import com.hnxind.zscj.R;
 
 public class Act_CrpSystem extends AppCompatActivity {
@@ -27,6 +29,7 @@ public class Act_CrpSystem extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        toolbar.setBackgroundColor(Theme.MainColor);
     }
 
     public void openInformation(View view) {

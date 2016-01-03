@@ -8,6 +8,8 @@ import android.view.View;
 
 import com.hnxind.library.jieyueHistory.Act_JieyueHistory;
 import com.hnxind.library.qianfei.Act_Qianfei;
+import com.hnxind.setting.Act_Setting;
+import com.hnxind.setting.Theme;
 import com.hnxind.zscj.R;
 
 public class Act_Library extends AppCompatActivity {
@@ -24,6 +26,7 @@ public class Act_Library extends AppCompatActivity {
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.mipmap.iconfont_back);
+        toolbar.setBackgroundColor(Theme.MainColor);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

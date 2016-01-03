@@ -24,6 +24,8 @@ import com.android.volley.toolbox.Volley;
 import com.hnxind.model.CrpInformation;
 import com.hnxind.model.UserInfo;
 import com.hnxind.model.mUrl;
+import com.hnxind.setting.Act_Setting;
+import com.hnxind.setting.Theme;
 import com.hnxind.utils.Act_WebView;
 import com.hnxind.utils.SwiperefreshWithLoadMore;
 import com.hnxind.utils.Utils_user;
@@ -99,6 +101,7 @@ public class Act_Information extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        toolbar.setBackgroundColor(Theme.MainColor);
     }
     public void getinformation(final boolean isRefresh){//获取信息
         swiperefreshWithLoadMore.setRefreshing(true);

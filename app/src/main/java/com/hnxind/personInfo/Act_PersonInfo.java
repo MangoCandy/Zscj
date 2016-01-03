@@ -2,6 +2,7 @@ package com.hnxind.personInfo;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,8 @@ import com.hnxind.model.CrpInformation;
 import com.hnxind.model.StudentInfo;
 import com.hnxind.model.UserInfo;
 import com.hnxind.model.mUrl;
+import com.hnxind.setting.Act_Setting;
+import com.hnxind.setting.Theme;
 import com.hnxind.utils.Utils_user;
 import com.hnxind.zscj.R;
 
@@ -50,11 +53,15 @@ public class Act_PersonInfo extends AppCompatActivity {
     }
     CollapsingToolbarLayout toolbarLayout;
     public void initToolbar(){
+        AppBarLayout appBarLayout=(AppBarLayout)findViewById(R.id.app_bar);
+        appBarLayout.setBackgroundColor(Theme.MainColor);
+
         toolbarLayout=(CollapsingToolbarLayout)findViewById(R.id.toolbar_layout);
         toolbarLayout.setExpandedTitleColor(Color.WHITE);
         toolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
         toolbarLayout.setCollapsedTitleTextColor(Color.TRANSPARENT);
         toolbarLayout.setTitleEnabled(false);
+        toolbarLayout.setContentScrimColor(Theme.MainColor);
 
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

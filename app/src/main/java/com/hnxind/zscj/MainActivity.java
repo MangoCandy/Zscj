@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.design.widget.NavigationView;
@@ -32,6 +33,8 @@ import com.bumptech.glide.Glide;
 import com.hnxind.model.Grid;
 import com.hnxind.model.mUrl;
 import com.hnxind.personInfo.Act_PersonInfo;
+import com.hnxind.setting.Act_Setting;
+import com.hnxind.setting.Theme;
 import com.hnxind.utils.Utils_user;
 
 import org.json.JSONArray;
@@ -61,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
 //        toolbar.setNavigationIcon(R.mipmap.logo);
         setSupportActionBar(toolbar);
+        toolbar.setBackgroundColor(Theme.MainColor);
         toolbar.setMenu(null,null);
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

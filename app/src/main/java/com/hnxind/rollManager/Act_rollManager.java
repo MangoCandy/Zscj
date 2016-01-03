@@ -10,6 +10,8 @@ import com.hnxind.rollManager.Act_Contacts.Act_Contacts;
 import com.hnxind.rollManager.Act_Kebiao.Act_Kebiao;
 import com.hnxind.rollManager.Act_PayForStudy.Act_PayForStudy;
 import com.hnxind.rollManager.Act_Score.Act_score;
+import com.hnxind.setting.Act_Setting;
+import com.hnxind.setting.Theme;
 import com.hnxind.zscj.R;
 
 public class Act_rollManager extends AppCompatActivity {
@@ -31,6 +33,7 @@ public class Act_rollManager extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        toolbar.setBackgroundColor(Theme.MainColor);
     }
 
     //跳转联系人

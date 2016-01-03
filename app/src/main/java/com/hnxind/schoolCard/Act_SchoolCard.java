@@ -7,6 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.hnxind.schoolCard.Act_CostList.Act_CostList;
+import com.hnxind.setting.Act_Setting;
+import com.hnxind.setting.Theme;
 import com.hnxind.zscj.R;
 
 public class Act_SchoolCard extends AppCompatActivity {
@@ -27,6 +29,7 @@ public class Act_SchoolCard extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        toolbar.setBackgroundColor(Theme.MainColor);
     }
 
     public void openCostList(View view) {//支付历史

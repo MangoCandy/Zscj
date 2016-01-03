@@ -24,6 +24,8 @@ import com.android.volley.toolbox.Volley;
 import com.hnxind.model.Cost;
 import com.hnxind.model.UserInfo;
 import com.hnxind.model.mUrl;
+import com.hnxind.setting.Act_Setting;
+import com.hnxind.setting.Theme;
 import com.hnxind.utils.Utils_user;
 import com.hnxind.zscj.R;
 
@@ -91,6 +93,7 @@ public class Act_CostList extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        toolbar.setBackgroundColor(Theme.MainColor);
     }
 
     public void getCostList(final String date){

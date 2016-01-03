@@ -1,6 +1,9 @@
 package com.hnxind.library;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -32,6 +35,8 @@ import com.hnxind.library.book.BookAdapter;
 import com.hnxind.model.Book;
 import com.hnxind.model.UserInfo;
 import com.hnxind.model.mUrl;
+import com.hnxind.setting.Act_Setting;
+import com.hnxind.setting.Theme;
 import com.hnxind.utils.Utils_user;
 import com.hnxind.zscj.R;
 
@@ -63,6 +68,13 @@ public class Act_Book extends AppCompatActivity {
     }
 
     public void initToolbar(){
+        AppBarLayout appBarLayout=(AppBarLayout)findViewById(R.id.app_bar);
+        appBarLayout.setBackgroundColor(Theme.MainColor);
+
+        CollapsingToolbarLayout toolbarLayout;
+        toolbarLayout=(CollapsingToolbarLayout)findViewById(R.id.toolbar_layout);
+        toolbarLayout.setContentScrimColor(Theme.MainColor);
+
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.mipmap.iconfont_back);
         setSupportActionBar(toolbar);

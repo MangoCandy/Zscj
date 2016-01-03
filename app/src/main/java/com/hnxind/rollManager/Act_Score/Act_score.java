@@ -25,6 +25,8 @@ import com.hnxind.model.Contact;
 import com.hnxind.model.Score;
 import com.hnxind.model.UserInfo;
 import com.hnxind.model.mUrl;
+import com.hnxind.setting.Act_Setting;
+import com.hnxind.setting.Theme;
 import com.hnxind.utils.Utils_user;
 import com.hnxind.zscj.R;
 
@@ -132,6 +134,7 @@ public class Act_score extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        toolbar.setBackgroundColor(Theme.MainColor);
     }
     public void getScore(final String date){
         swipeRefreshLayout.setRefreshing(true);

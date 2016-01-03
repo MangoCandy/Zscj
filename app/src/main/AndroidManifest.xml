@@ -20,8 +20,7 @@
             android:name=".Act_Login"
             android:label="@string/login_lable"
             android:theme="@style/loginStyle"
-            android:windowSoftInputMode="adjustPan">
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
@@ -93,15 +92,17 @@
             android:label="建议反馈"
             android:theme="@style/mStyle"
             android:windowSoftInputMode="adjustNothing" />
-        <activity android:name=".Act_Wellcome"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-            android:screenOrientation="portrait">
+        <activity
+            android:name=".Act_Wellcome"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.hnxind.setting.Act_Setting"></activity>
     </application>
 
 </manifest>
