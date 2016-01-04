@@ -101,7 +101,9 @@ public class Act_Information extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
         toolbar.setBackgroundColor(Theme.MainColor);
+        toolbar.setTitleTextColor(Theme.TitleColor);
     }
     public void getinformation(final boolean isRefresh){//获取信息
         swiperefreshWithLoadMore.setRefreshing(true);

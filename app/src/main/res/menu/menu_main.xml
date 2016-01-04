@@ -11,4 +11,9 @@
         android:icon="@mipmap/iconfont_loginout"
         app:showAsAction="always">
     </item>
+    <item android:title="设置"
+        android:id="@+id/setting"
+        android:icon="@mipmap/iconfont_setting"
+        app:showAsAction="always">
+    </item>
 </menu>

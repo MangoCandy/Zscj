@@ -1,6 +1,7 @@
 package com.hnxind.personInfo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -47,6 +48,7 @@ public class Act_PersonInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person_info);
         userInfo=(new Utils_user(this)).getUserInfo();
+
         initToolbar();
         initView();
         getInfo();
@@ -57,8 +59,6 @@ public class Act_PersonInfo extends AppCompatActivity {
         appBarLayout.setBackgroundColor(Theme.MainColor);
 
         toolbarLayout=(CollapsingToolbarLayout)findViewById(R.id.toolbar_layout);
-        toolbarLayout.setExpandedTitleColor(Color.WHITE);
-        toolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
         toolbarLayout.setCollapsedTitleTextColor(Color.TRANSPARENT);
         toolbarLayout.setTitleEnabled(false);
         toolbarLayout.setContentScrimColor(Theme.MainColor);
@@ -66,6 +66,7 @@ public class Act_PersonInfo extends AppCompatActivity {
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.mipmap.iconfont_back);
+        toolbar.setTitleTextColor(Theme.TitleColor);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -152,4 +153,5 @@ public class Act_PersonInfo extends AppCompatActivity {
         ((TextView)findViewById(R.id.studentNo)).setText(studentInfo.getStudent_no());
         ((TextView)findViewById(R.id.clas)).setText(studentInfo.getClasses());
     }
+
 }

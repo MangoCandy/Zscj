@@ -102,6 +102,8 @@ public class Act_Kebiao extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        toolbar.setTitleTextColor(Theme.TitleColor);
         toolbar.setBackgroundColor(Theme.MainColor);
     }
     public void getDate(int type){

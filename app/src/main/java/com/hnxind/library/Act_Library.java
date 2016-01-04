@@ -26,6 +26,8 @@ public class Act_Library extends AppCompatActivity {
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.mipmap.iconfont_back);
+
+        toolbar.setTitleTextColor(Theme.TitleColor);
         toolbar.setBackgroundColor(Theme.MainColor);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

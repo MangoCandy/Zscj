@@ -134,6 +134,8 @@ public class Act_score extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        toolbar.setTitleTextColor(Theme.TitleColor);
         toolbar.setBackgroundColor(Theme.MainColor);
     }
     public void getScore(final String date){

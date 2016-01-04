@@ -2,6 +2,7 @@ package com.hnxind.fankui;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -44,6 +45,8 @@ public class Act_Fankui extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        toolbar.setTitleTextColor(Theme.TitleColor);
         toolbar.setBackgroundColor(Theme.MainColor);
     }
 

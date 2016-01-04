@@ -102,7 +102,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.hnxind.setting.Act_Setting"></activity>
+        <activity android:name="com.hnxind.setting.Act_Setting"
+            android:label="个人设置"
+            android:theme="@style/mStyle"/>
     </application>
-
 </manifest>

@@ -29,6 +29,8 @@ public class Act_SchoolCard extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        toolbar.setTitleTextColor(Theme.TitleColor);
         toolbar.setBackgroundColor(Theme.MainColor);
     }
 

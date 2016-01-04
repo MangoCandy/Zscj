@@ -1,9 +1,11 @@
 package com.hnxind.zscj;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Looper;
@@ -51,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     RecyclerView gridView;
     GridAdapter gridAdapter;
     NavigationView navigationView;
+
+    MyBroad myBroad;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +62,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getGrids();
         initView();
         initToolBar();
+        initBroad();
+    }
+
+    public void initBroad(){
+        MyBroad myBroad=new MyBroad();
+        IntentFilter filter=new IntentFilter();
+        filter.addAction(Theme.CHANGE_THEME);
+        registerReceiver(myBroad,filter);
     }
     DrawerLayout drawer;
     public void initToolBar(){
@@ -65,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        toolbar.setNavigationIcon(R.mipmap.logo);
         setSupportActionBar(toolbar);
         toolbar.setBackgroundColor(Theme.MainColor);
-        toolbar.setMenu(null,null);
+        toolbar.setTitleTextColor(Theme.TitleColor);
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -132,6 +144,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         });
                         builder.show();
                         break;
+                    case R.id.setting://设置
+                        Intent intent1=new Intent(context, Act_Setting.class);
+                        startActivity(intent1);
+                        break;
                 }
             }
         },300);
@@ -151,5 +167,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
         builder.show();
+    }
+
+    public class MyBroad extends BroadcastReceiver{
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            initToolBar();
+        }
     }
 }

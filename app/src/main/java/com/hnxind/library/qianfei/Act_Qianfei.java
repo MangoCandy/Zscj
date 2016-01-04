@@ -55,6 +55,8 @@ public class Act_Qianfei extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        toolbar.setTitleTextColor(Theme.TitleColor);
         toolbar.setBackgroundColor(Theme.MainColor);
     }
     public void initView(){

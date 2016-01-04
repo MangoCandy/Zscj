@@ -94,6 +94,8 @@ public class Act_WebView extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
         toolbar.setBackgroundColor(Theme.MainColor);
+        toolbar.setTitleTextColor(Theme.TitleColor);
     }
 }
