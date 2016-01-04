@@ -53,8 +53,12 @@ public class Act_Contacts extends AppCompatActivity {
         initToolbar();
         getContacts();
     }
+
+    Theme theme;
     //初始化toolbar
     public void initToolbar(){
+        theme=new Theme(this);
+
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.mipmap.iconfont_back);
@@ -65,8 +69,8 @@ public class Act_Contacts extends AppCompatActivity {
             }
         });
 
-        toolbar.setTitleTextColor(Theme.TitleColor);
-        toolbar.setBackgroundColor(Theme.MainColor);
+        toolbar.setTitleTextColor(theme.getTitleColor());
+        toolbar.setBackgroundColor(theme.getMainColor());
     }
     public void initView(){
         contactsView=(RecyclerView)findViewById(R.id.contacts_recycleview);

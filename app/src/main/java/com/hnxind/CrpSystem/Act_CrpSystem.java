@@ -12,7 +12,6 @@ import com.hnxind.setting.Theme;
 import com.hnxind.zscj.R;
 
 public class Act_CrpSystem extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +19,8 @@ public class Act_CrpSystem extends AppCompatActivity {
         initToolbar();
     }
     public void initToolbar(){
+        Theme theme=new Theme(this);
+
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.mipmap.iconfont_back);
@@ -30,8 +31,8 @@ public class Act_CrpSystem extends AppCompatActivity {
             }
         });
 
-        toolbar.setTitleTextColor(Theme.TitleColor);
-        toolbar.setBackgroundColor(Theme.MainColor);
+        toolbar.setTitleTextColor(theme.getTitleColor());
+        toolbar.setBackgroundColor(theme.getMainColor());
     }
 
     public void openInformation(View view) {

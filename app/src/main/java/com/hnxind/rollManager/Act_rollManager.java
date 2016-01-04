@@ -15,7 +15,6 @@ import com.hnxind.setting.Theme;
 import com.hnxind.zscj.R;
 
 public class Act_rollManager extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +23,8 @@ public class Act_rollManager extends AppCompatActivity {
     }
 
     public void initToolbar(){
+        Theme theme=new Theme(this);
+
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.mipmap.iconfont_back);
@@ -34,8 +35,8 @@ public class Act_rollManager extends AppCompatActivity {
             }
         });
 
-        toolbar.setTitleTextColor(Theme.TitleColor);
-        toolbar.setBackgroundColor(Theme.MainColor);
+        toolbar.setTitleTextColor(theme.getTitleColor());
+        toolbar.setBackgroundColor(theme.getMainColor());
     }
 
     //跳转联系人

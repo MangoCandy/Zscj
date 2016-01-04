@@ -13,7 +13,6 @@ import com.hnxind.setting.Theme;
 import com.hnxind.zscj.R;
 
 public class Act_Library extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,12 +22,14 @@ public class Act_Library extends AppCompatActivity {
 
     //初始化toolbar
     public void initToolbar(){
+        Theme theme=new Theme(this);
+
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.mipmap.iconfont_back);
 
-        toolbar.setTitleTextColor(Theme.TitleColor);
-        toolbar.setBackgroundColor(Theme.MainColor);
+        toolbar.setTitleTextColor(theme.getTitleColor());
+        toolbar.setBackgroundColor(theme.getMainColor());
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

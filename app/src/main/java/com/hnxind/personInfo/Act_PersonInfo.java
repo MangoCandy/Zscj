@@ -56,18 +56,20 @@ public class Act_PersonInfo extends AppCompatActivity {
 
     CollapsingToolbarLayout toolbarLayout;
     public void initToolbar(){
+        Theme theme=new Theme(this);
+
         AppBarLayout appBarLayout=(AppBarLayout)findViewById(R.id.app_bar);
-        appBarLayout.setBackgroundColor(Theme.MainColor);
+        appBarLayout.setBackgroundColor(theme.MainColor);
 
         toolbarLayout=(CollapsingToolbarLayout)findViewById(R.id.toolbar_layout);
         toolbarLayout.setCollapsedTitleTextColor(Color.TRANSPARENT);
         toolbarLayout.setTitleEnabled(false);
-        toolbarLayout.setContentScrimColor(Theme.MainColor);
+        toolbarLayout.setContentScrimColor(theme.MainColor);
 
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.mipmap.iconfont_back);
-        toolbar.setTitleTextColor(Theme.TitleColor);
+        toolbar.setTitleTextColor(theme.TitleColor);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -92,6 +92,8 @@ public class Act_Information extends AppCompatActivity {
         startActivity(intent);
     }
     public void initToolbar(){
+        Theme theme=new Theme(this);
+
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.mipmap.iconfont_back);
@@ -102,8 +104,8 @@ public class Act_Information extends AppCompatActivity {
             }
         });
 
-        toolbar.setBackgroundColor(Theme.MainColor);
-        toolbar.setTitleTextColor(Theme.TitleColor);
+        toolbar.setTitleTextColor(theme.getTitleColor());
+        toolbar.setBackgroundColor(theme.getMainColor());
     }
     public void getinformation(final boolean isRefresh){//获取信息
         swiperefreshWithLoadMore.setRefreshing(true);

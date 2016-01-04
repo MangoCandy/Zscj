@@ -36,6 +36,8 @@ public class Act_Fankui extends AppCompatActivity {
         editText=(EditText)findViewById(R.id.edittext);
     }
     public void initToolbar(){
+        Theme theme=new Theme(this);
+
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.mipmap.iconfont_back);
@@ -46,8 +48,8 @@ public class Act_Fankui extends AppCompatActivity {
             }
         });
 
-        toolbar.setTitleTextColor(Theme.TitleColor);
-        toolbar.setBackgroundColor(Theme.MainColor);
+        toolbar.setTitleTextColor(theme.getTitleColor());
+        toolbar.setBackgroundColor(theme.getMainColor());
     }
 
     public void post(View view) {

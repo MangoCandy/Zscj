@@ -42,6 +42,7 @@ public class Act_PayForStudy extends AppCompatActivity {
     List<Tuition> tuitions=new ArrayList<>();
     TuitionAdapter adapter;
     SwipeRefreshLayout swipeRefreshLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +53,8 @@ public class Act_PayForStudy extends AppCompatActivity {
         getPaynum();
     }
     public void initToolbar(){
+        Theme theme=new Theme(this);
+
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.mipmap.iconfont_back);
@@ -62,8 +65,8 @@ public class Act_PayForStudy extends AppCompatActivity {
             }
         });
 
-        toolbar.setTitleTextColor(Theme.TitleColor);
-        toolbar.setBackgroundColor(Theme.MainColor);
+        toolbar.setTitleTextColor(theme.getTitleColor());
+        toolbar.setBackgroundColor(theme.getMainColor());
     }
     public void initView(){
         payList=(ListView)findViewById(R.id.payList);

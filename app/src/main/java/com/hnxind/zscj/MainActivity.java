@@ -72,11 +72,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     DrawerLayout drawer;
     public void initToolBar(){
+        Theme theme=new Theme(this);
+
         Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
 //        toolbar.setNavigationIcon(R.mipmap.logo);
         setSupportActionBar(toolbar);
-        toolbar.setBackgroundColor(Theme.MainColor);
-        toolbar.setTitleTextColor(Theme.TitleColor);
+        toolbar.setTitleTextColor(theme.getTitleColor());
+        toolbar.setBackgroundColor(theme.getMainColor());
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -88,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         navigationView=(NavigationView)findViewById(R.id.navigationView);
-        navigationView.getHeaderView(0).setBackgroundColor(Theme.MainColor);
+        navigationView.getHeaderView(0).setBackgroundColor(theme.MainColor);
 
     }
     public void initView(){

@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.hnxind.zscj.MyApplication;
 import com.hnxind.zscj.R;
 
 import java.util.HashMap;
@@ -32,12 +33,14 @@ public class Act_Setting extends AppCompatActivity {
         initView();
     }
 
-    String[] colorNames=new String[]{"默认","建城蓝","罗兰紫","少女粉","优雅绿","沁心绿","活力橙","时尚灰"};
+    String[] colorNames=new String[]{"默认","建城蓝","罗兰紫","少女粉","优雅绿","沁心绿","活力橙","时尚灰","清新蓝"};
     String[] colorCodes=new String[]{"#93d9fd"/*默认*/,"#0268b1"/*建城蓝*/,"#c2185b"/*罗兰紫*/,"#FFF26E8F"/*少女粉*/
-        ,"#FF2CB38D"/*优雅绿*/,"#009688"/*沁心绿*/,"#e7ef8636"/*活力橙*/,"#607d8b"/*时尚灰*/
+        ,"#FF2CB38D"/*优雅绿*/,"#009688"/*沁心绿*/,"#e7ef8636"/*活力橙*/,"#607d8b"/*时尚灰*/,"#00bcd4"/*清新蓝*/
     };
 
     public void initToolbar(){
+        Theme theme=new Theme(this);
+
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.mipmap.iconfont_back);
@@ -48,8 +51,8 @@ public class Act_Setting extends AppCompatActivity {
             }
         });
 
-        toolbar.setTitleTextColor(Theme.TitleColor);
-        toolbar.setBackgroundColor(Theme.MainColor);
+        toolbar.setBackgroundColor(theme.getMainColor());
+        toolbar.setTitleTextColor(theme.getTitleColor());
     }
 
     public void initView(){
@@ -66,14 +69,7 @@ public class Act_Setting extends AppCompatActivity {
         colorView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Theme.MainColor=Color.parseColor(colorCodes[position]);
-                if(position==0){
-                    Theme.TitleColor=Color.parseColor("#48809d");
-                }else{
-                    Theme.TitleColor=Color.WHITE;
-                }
                 alertDialog.dismiss();
-                initToolbar();
                 colorName.setText(colorNames[position]);
 
                 Intent intent=new Intent();
@@ -82,13 +78,19 @@ public class Act_Setting extends AppCompatActivity {
 
                 SharedPreferences sharedPreferences=getSharedPreferences(Theme.THEME_SP,MODE_PRIVATE);
                 SharedPreferences.Editor editor=sharedPreferences.edit();
-                editor.putInt(Theme.MAIN_COLOR,Theme.MainColor);
-                editor.putInt(Theme.TITLE_COLOR,Theme.TitleColor);
+                editor.putInt(Theme.MAIN_COLOR,Color.parseColor(colorCodes[position]));
+                if(position==0){
+                    editor.putInt(Theme.TITLE_COLOR,Color.parseColor(Theme.DEFAULT_TITLE_COLOR));
+                }else{
+                    editor.putInt(Theme.TITLE_COLOR,Color.WHITE);
+                }
                 editor.putString(Theme.COLOR_NAME,colorNames[position]);
                 editor.commit();
+                initToolbar();
             }
         });
         builder.setView(colorView);
+        builder.setTitle("请选择主题");
         alertDialog=builder.show();
 
     }

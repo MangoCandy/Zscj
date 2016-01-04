@@ -84,6 +84,8 @@ public class Act_WebView extends AppCompatActivity {
     }
 
     public void initToolbar(){
+        Theme theme=new Theme(this);
+
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         toolbar.setTitle(title);
         setSupportActionBar(toolbar);
@@ -95,7 +97,7 @@ public class Act_WebView extends AppCompatActivity {
             }
         });
 
-        toolbar.setBackgroundColor(Theme.MainColor);
-        toolbar.setTitleTextColor(Theme.TitleColor);
+        toolbar.setTitleTextColor(theme.getTitleColor());
+        toolbar.setBackgroundColor(theme.getMainColor());
     }
 }

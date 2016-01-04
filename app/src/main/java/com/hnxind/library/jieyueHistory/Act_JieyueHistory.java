@@ -65,6 +65,8 @@ public class Act_JieyueHistory extends AppCompatActivity {
         listView.setAdapter(adapter);
     }
     public void initToolbar(){
+        Theme theme=new Theme(this);
+
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.mipmap.iconfont_back);
         setSupportActionBar(toolbar);
@@ -75,8 +77,8 @@ public class Act_JieyueHistory extends AppCompatActivity {
             }
         });
 
-        toolbar.setTitleTextColor(Theme.TitleColor);
-        toolbar.setBackgroundColor(Theme.MainColor);
+        toolbar.setTitleTextColor(theme.getTitleColor());
+        toolbar.setBackgroundColor(theme.getMainColor());
     }
 
     public void getHistory(){

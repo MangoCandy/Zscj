@@ -18,8 +18,6 @@ public class Act_Wellcome extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wellcome);
 
-        initTheme();//初始化主题
-
         Handler handler=new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -31,12 +29,4 @@ public class Act_Wellcome extends Activity {
         },2000);
     }
 
-    public void initTheme(){
-        SharedPreferences sharedPreferences=getSharedPreferences(Theme.THEME_SP,MODE_PRIVATE);
-        int maincolor=sharedPreferences.getInt(Theme.MAIN_COLOR,0);
-        if(maincolor!=0){
-            Theme.MainColor=maincolor;
-            Theme.TitleColor=sharedPreferences.getInt(Theme.TITLE_COLOR,Color.parseColor("#48809d"));
-        }
-    }
 }

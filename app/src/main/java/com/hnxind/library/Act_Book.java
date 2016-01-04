@@ -68,18 +68,20 @@ public class Act_Book extends AppCompatActivity {
     }
 
     public void initToolbar(){
+        Theme theme=new Theme(this);
+
         AppBarLayout appBarLayout=(AppBarLayout)findViewById(R.id.app_bar);
-        appBarLayout.setBackgroundColor(Theme.MainColor);
+        appBarLayout.setBackgroundColor(theme.MainColor);
 
         CollapsingToolbarLayout toolbarLayout;
         toolbarLayout=(CollapsingToolbarLayout)findViewById(R.id.toolbar_layout);
-        toolbarLayout.setCollapsedTitleTextColor(Theme.TitleColor);
-        toolbarLayout.setContentScrimColor(Theme.MainColor);
+        toolbarLayout.setCollapsedTitleTextColor(theme.TitleColor);
+        toolbarLayout.setContentScrimColor(theme.MainColor);
 
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.mipmap.iconfont_back);
         setSupportActionBar(toolbar);
-        toolbar.setTitleTextColor(Theme.TitleColor);
+        toolbar.setTitleTextColor(theme.TitleColor);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

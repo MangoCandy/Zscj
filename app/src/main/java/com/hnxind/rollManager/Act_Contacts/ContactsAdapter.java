@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hnxind.model.Contact;
+import com.hnxind.setting.Theme;
 import com.hnxind.zscj.R;
 
 import java.util.List;
@@ -31,6 +32,7 @@ import java.util.List;
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.mViewHolder> {
     List<Contact> contacts = null;
     Context context;
+    Theme theme;
 
     public ContactsAdapter(List<Contact> contacts) {
         this.contacts = contacts;
@@ -39,6 +41,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.mViewH
     @Override
     public mViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         context = parent.getContext();
+        theme=new Theme(context);
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_edit_contacts, null);
         return new mViewHolder(view);
     }
@@ -59,18 +62,21 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.mViewH
 
     String num;
 
-    public void initPopupWindow(Contact contact) {
+    public void initPopupWindow(Contact contact) {//点击联系人后弹窗
         num = contact.getNum();
         AlertDialog.Builder alertDialog_builder;
         View view = LayoutInflater.from(context).inflate(R.layout.pop_contacts, null);
+        ((LinearLayout)view.findViewById(R.id.backgroud)).setBackgroundColor(theme.getMainColor());
+
         TextView contact_name = (TextView) view.findViewById(R.id.contact_name);//设置人名
+        contact_name.setTextColor(theme.getTitleColor());
 
         LinearLayout call = (LinearLayout) view.findViewById(R.id.call);
         call.setOnClickListener(onClickListener);
-
+        //跳转短信
         LinearLayout sms = (LinearLayout) view.findViewById(R.id.sms);
         sms.setOnClickListener(onClickListener);
-
+        //复制号码
         LinearLayout copy = (LinearLayout) view.findViewById(R.id.copy);
         copy.setOnClickListener(onClickListener);
         if(Build.VERSION.SDK_INT<Build.VERSION_CODES.HONEYCOMB){

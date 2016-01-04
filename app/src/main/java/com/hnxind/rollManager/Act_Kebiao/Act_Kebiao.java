@@ -55,6 +55,7 @@ public class Act_Kebiao extends AppCompatActivity {
     Spinner spinner;
     String[] types=new String[]{"上周课表","本周课表","下周课表"};
     SwipeRefreshLayout swipeRefreshLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +94,8 @@ public class Act_Kebiao extends AppCompatActivity {
         expandableListView.setAdapter(adapter);
     }
     public void initToolbar(){
+        Theme theme=new Theme(this);
+
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.mipmap.iconfont_back);
@@ -103,8 +106,8 @@ public class Act_Kebiao extends AppCompatActivity {
             }
         });
 
-        toolbar.setTitleTextColor(Theme.TitleColor);
-        toolbar.setBackgroundColor(Theme.MainColor);
+        toolbar.setTitleTextColor(theme.getTitleColor());
+        toolbar.setBackgroundColor(theme.getMainColor());
     }
     public void getDate(int type){
         int i=0;
