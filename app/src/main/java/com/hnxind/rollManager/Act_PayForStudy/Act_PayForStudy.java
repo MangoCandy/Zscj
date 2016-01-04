@@ -126,7 +126,6 @@ public class Act_PayForStudy extends AppCompatActivity {
             }
         };
         requestQueue.add(stringRequest);
-        requestQueue.start();
     }
     Context context=this;
 }

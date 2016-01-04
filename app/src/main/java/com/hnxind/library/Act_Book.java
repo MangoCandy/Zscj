@@ -73,7 +73,6 @@ public class Act_Book extends AppCompatActivity {
 
         CollapsingToolbarLayout toolbarLayout;
         toolbarLayout=(CollapsingToolbarLayout)findViewById(R.id.toolbar_layout);
-
         toolbarLayout.setCollapsedTitleTextColor(Theme.TitleColor);
         toolbarLayout.setContentScrimColor(Theme.MainColor);
 
@@ -185,7 +184,6 @@ public class Act_Book extends AppCompatActivity {
             }
         };
         requestQueue.add(stringRequest);
-        requestQueue.start();
     }
 
 }

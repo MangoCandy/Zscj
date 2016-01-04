@@ -31,9 +31,10 @@ public class Act_Setting extends AppCompatActivity {
         initToolbar();
         initView();
     }
+
     String[] colorNames=new String[]{"默认","建城蓝","罗兰紫","少女粉","优雅绿","沁心绿","活力橙","时尚灰"};
     String[] colorCodes=new String[]{"#93d9fd"/*默认*/,"#0268b1"/*建城蓝*/,"#c2185b"/*罗兰紫*/,"#FFF26E8F"/*少女粉*/
-        ,"#FF2CB38D"/*优雅绿*/,"#009688"/*沁心绿*/,"#ff5722"/*活力橙*/,"#607d8b"/*时尚灰*/
+        ,"#FF2CB38D"/*优雅绿*/,"#009688"/*沁心绿*/,"#e7ef8636"/*活力橙*/,"#607d8b"/*时尚灰*/
     };
 
     public void initToolbar(){
@@ -61,7 +62,7 @@ public class Act_Setting extends AppCompatActivity {
         final AlertDialog.Builder builder=new AlertDialog.Builder(this);
 
         colorView=new ListView(this);
-        colorView.setAdapter(new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,colorNames));
+        colorView.setAdapter(new ArrayAdapter<>(this,R.layout.single_simple_list,colorNames));
         colorView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -87,7 +88,6 @@ public class Act_Setting extends AppCompatActivity {
                 editor.commit();
             }
         });
-        builder.setCustomTitle(LayoutInflater.from(this).inflate(R.layout.nav_header,null));
         builder.setView(colorView);
         alertDialog=builder.show();
 

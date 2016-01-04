@@ -9,13 +9,15 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:fitsSystemWindows="true"
+        app:theme="@style/AppTheme.AppBarOverlay"
+        app:backgroundTint="#ff3"
         >
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
             app:titleEnabled="false"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
+            android:fitsSystemWindows="false"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed|enterAlwaysCollapsed|enterAlways"
             >
             <LinearLayout

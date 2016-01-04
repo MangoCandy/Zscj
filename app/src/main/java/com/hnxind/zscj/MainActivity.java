@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Looper;
@@ -52,9 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     RecyclerView gridView;
     GridAdapter gridAdapter;
-    NavigationView navigationView;
 
-    MyBroad myBroad;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +88,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         navigationView=(NavigationView)findViewById(R.id.navigationView);
+        navigationView.getHeaderView(0).setBackgroundColor(Theme.MainColor);
+
     }
     public void initView(){
         gridAdapter=new GridAdapter(grids);
@@ -130,7 +131,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     case R.id.loginout:
                         AlertDialog.Builder builder=new AlertDialog.Builder(context);
                         builder.setMessage("确认退出登录");
-                        builder.setCustomTitle(LayoutInflater.from(context).inflate(R.layout.nav_header,null));
+//                        builder.setCustomTitle(LayoutInflater.from(context).inflate(R.layout.nav_header,null));
+                        builder.setTitle("温馨提示");
                         builder.setNegativeButton("取消",null);
                         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
@@ -157,7 +159,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
-        builder.setCustomTitle(LayoutInflater.from(this).inflate(R.layout.nav_header,null));
+//        View view=LayoutInflater.from(this).inflate(R.layout.nav_header,null);
+//        builder.setCustomTitle(view);
+        builder.setTitle("温馨提示");
         builder.setMessage("确认退出掌上城建");
         builder.setNegativeButton("取消",null);
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {

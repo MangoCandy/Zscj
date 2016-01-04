@@ -162,7 +162,6 @@ public class Act_Information extends AppCompatActivity {
             }
         };
         requestQueue.add(stringRequest);
-        requestQueue.start();
     }
 
 }

@@ -126,7 +126,6 @@ public class Act_Qianfei extends AppCompatActivity {
             }
         };
         requestQueue.add(stringRequest);
-        requestQueue.start();
     }
 
     public void setView(Qianfei qianfei){

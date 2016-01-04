@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="mStyle" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
-        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+    <style name="mStyle" parent="AppTheme.NoActionBar">
+        <item name="android:statusBarColor">#00000000</item>
+
+        <item name="android:windowTranslucentStatus">true</item>
         <item name="drawerArrowStyle">@style/AppTheme.DrawerArrowToggle</item>
     </style>
 </resources>

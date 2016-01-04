@@ -156,7 +156,6 @@ public class Act_CostList extends AppCompatActivity {
             }
         };
         requestQueue.add(stringRequest);
-        requestQueue.start();
     }
 
     public void confirm(View view) {//确认时间

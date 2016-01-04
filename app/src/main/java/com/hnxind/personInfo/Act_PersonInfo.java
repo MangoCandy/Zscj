@@ -53,6 +53,7 @@ public class Act_PersonInfo extends AppCompatActivity {
         initView();
         getInfo();
     }
+
     CollapsingToolbarLayout toolbarLayout;
     public void initToolbar(){
         AppBarLayout appBarLayout=(AppBarLayout)findViewById(R.id.app_bar);
@@ -119,6 +120,7 @@ public class Act_PersonInfo extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Log.i("error",error+"");
                 swipeRefreshLayout.setRefreshing(false);
                 Toast.makeText(context,"请检查网络设置或尝试刷新",Toast.LENGTH_SHORT).show();
             }
@@ -135,7 +137,6 @@ public class Act_PersonInfo extends AppCompatActivity {
             }
         };
         requestQueue.add(stringRequest);
-        requestQueue.start();
     }
 
     public void setView(){

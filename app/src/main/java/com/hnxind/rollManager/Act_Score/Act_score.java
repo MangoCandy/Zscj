@@ -185,6 +185,5 @@ public class Act_score extends AppCompatActivity {
             }
         };
         requestQueue.add(stringRequest);
-        requestQueue.start();
     }
 }

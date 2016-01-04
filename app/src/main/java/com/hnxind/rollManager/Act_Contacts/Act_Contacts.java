@@ -132,7 +132,6 @@ public class Act_Contacts extends AppCompatActivity {
             }
         };
         requestQueue.add(stringRequest);
-        requestQueue.start();
     }
 
     //排序

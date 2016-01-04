@@ -131,6 +131,5 @@ public class Act_JieyueHistory extends AppCompatActivity {
             }
         };
         requestQueue.add(stringRequest);
-        requestQueue.start();
     }
 }

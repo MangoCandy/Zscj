@@ -74,7 +74,6 @@ public class Act_Fankui extends AppCompatActivity {
                 }
             });
             requestQueue.add(stringRequest);
-            requestQueue.start();
             initProgress();
         }
     }

@@ -35,6 +35,7 @@
                 android:layout_height="200dp"
                 android:maxLines="15"/>
             <android.support.design.widget.FloatingActionButton
+                app:backgroundTint="#37474f"
                 android:id="@+id/send"
                 android:onClick="post"
                 android:src="@mipmap/iconfont_send"

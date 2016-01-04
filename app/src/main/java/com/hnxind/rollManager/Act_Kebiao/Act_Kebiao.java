@@ -176,7 +176,6 @@ public class Act_Kebiao extends AppCompatActivity {
             }
         };
         requestQueue.add(stringRequest);
-        requestQueue.start();
     }
 
     public String getXq(String date){

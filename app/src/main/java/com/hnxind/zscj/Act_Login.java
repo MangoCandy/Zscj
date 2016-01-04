@@ -144,7 +144,6 @@ public class Act_Login extends AppCompatActivity {
             }
         };
         requestQueue.add(stringRequest);
-        requestQueue.start();
     }
     private void gotoMain(JSONArray jsonArray){
         Intent intent=new Intent(this,MainActivity.class);
