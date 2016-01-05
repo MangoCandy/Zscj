@@ -122,6 +122,7 @@ public class Act_Book extends AppCompatActivity {
         manager.setStackFromEnd(false);
         listView.setLayoutManager(manager);
         listView.setAdapter(adapter);
+
         swipeRefreshLayout=(SwipeRefreshLayout)findViewById(R.id.refresh);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -131,12 +132,14 @@ public class Act_Book extends AppCompatActivity {
         });
     }
     public void getDate(View view){
+        swipeRefreshLayout.setRefreshing(true);
+
         final String t=editText.getText().toString();
         InputMethodManager imm=(InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
         if(imm!=null){
             imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(),0);
         }
-        swipeRefreshLayout.setRefreshing(true);
+
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         StringRequest stringRequest=new StringRequest(Request.Method.POST, mUrl.gridUrl, new Response.Listener<String>() {
             @Override

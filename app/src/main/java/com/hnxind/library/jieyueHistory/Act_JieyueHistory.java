@@ -59,6 +59,8 @@ public class Act_JieyueHistory extends AppCompatActivity {
                 getHistory();
             }
         });
+        swipeRefreshLayout.setProgressViewOffset(false, 0, 60);
+        swipeRefreshLayout.setRefreshing(true);
 
         listView=(ExpandableListView)findViewById(R.id.jieyueView);
         adapter=new JieyueAdapter(jieyueLSMap,books);
@@ -82,7 +84,6 @@ public class Act_JieyueHistory extends AppCompatActivity {
     }
 
     public void getHistory(){
-        swipeRefreshLayout.setRefreshing(true);
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         StringRequest stringRequest=new StringRequest(Request.Method.POST, mUrl.gridUrl, new Response.Listener<String>() {
             @Override

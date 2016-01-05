@@ -50,9 +50,10 @@ public class Act_PayForStudy extends AppCompatActivity {
         userInfo=utils_user.getUserInfo();
         initView();
         initToolbar();
-        swipeRefreshLayout.setRefreshing(true);
+
         getPaynum();
     }
+
     public void initToolbar(){
         Theme theme=new Theme(this);
 
@@ -81,6 +82,8 @@ public class Act_PayForStudy extends AppCompatActivity {
                 getPaynum();
             }
         });
+        swipeRefreshLayout.setProgressViewOffset(false, 0, 60);
+        swipeRefreshLayout.setRefreshing(true);
     }
     public void getPaynum(){//获取学费数据
         RequestQueue requestQueue= Volley.newRequestQueue(this);

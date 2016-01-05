@@ -69,6 +69,8 @@ public class Act_Qianfei extends AppCompatActivity {
                 getqianfei();
             }
         });
+        swipeRefreshLayout.setProgressViewOffset(false, 0, 60);
+        swipeRefreshLayout.setRefreshing(true);
     }
     public void getqianfei(){
         RequestQueue requestQueue= Volley.newRequestQueue(this);

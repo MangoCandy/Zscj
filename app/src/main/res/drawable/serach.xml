@@ -2,5 +2,4 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="false" android:drawable="@mipmap/iconfont_search"></item>
     <item android:state_pressed="true" android:drawable="@mipmap/iconfont_search_pressed"></item>
-
 </selector>

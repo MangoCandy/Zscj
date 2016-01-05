@@ -72,6 +72,8 @@ public class Act_Kebiao extends AppCompatActivity {
                 getKebiao();
             }
         });
+        swipeRefreshLayout.setProgressViewOffset(false, 0, 30);
+        swipeRefreshLayout.setRefreshing(true);
 
         spinner=(Spinner)findViewById(R.id.spiner);
         spinner.setAdapter(new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,types));
@@ -119,7 +121,6 @@ public class Act_Kebiao extends AppCompatActivity {
         date=format.format(calendar.getTime());
     }
     public void getKebiao(){
-        swipeRefreshLayout.setRefreshing(true);
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         StringRequest stringRequest=new StringRequest(Request.Method.POST, mUrl.gridUrl, new Response.Listener<String>() {
             @Override
