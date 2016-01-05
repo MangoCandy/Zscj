@@ -39,9 +39,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:singleLine="true"/>
-                <Button
+                <ImageView
+                    android:paddingRight="5dp"
+                    android:src="@drawable/serach"
                     android:onClick="getDate"
-                    android:text="搜索"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>

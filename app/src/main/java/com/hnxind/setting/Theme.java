@@ -2,6 +2,7 @@ package com.hnxind.setting;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 
 /**
@@ -46,5 +47,15 @@ public class Theme {
 
     public void setTitleColor(int titleColor) {
         TitleColor = titleColor;
+    }
+
+    public ColorStateList getColorStateList(){
+        ColorStateList colorStateList=null;
+        int[][] states=new int[2][];
+        states[0]=new int[]{android.R.attr.state_pressed};
+        states[1]=new int[]{};
+        int[] colors=new int[]{MainColor+20,MainColor};
+        colorStateList=new ColorStateList(states,colors);
+        return colorStateList;
     }
 }

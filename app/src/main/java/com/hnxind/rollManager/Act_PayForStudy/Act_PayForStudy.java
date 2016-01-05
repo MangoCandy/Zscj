@@ -48,8 +48,9 @@ public class Act_PayForStudy extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay_for_study);
         userInfo=utils_user.getUserInfo();
-        initToolbar();
         initView();
+        initToolbar();
+        swipeRefreshLayout.setRefreshing(true);
         getPaynum();
     }
     public void initToolbar(){
@@ -82,7 +83,6 @@ public class Act_PayForStudy extends AppCompatActivity {
         });
     }
     public void getPaynum(){//获取学费数据
-        swipeRefreshLayout.setRefreshing(true);
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         StringRequest stringRequest=new StringRequest(Request.Method.POST, mUrl.gridUrl, new Response.Listener<String>() {
             @Override

@@ -109,12 +109,12 @@ public class Act_Kebiao extends AppCompatActivity {
         toolbar.setTitleTextColor(theme.getTitleColor());
         toolbar.setBackgroundColor(theme.getMainColor());
     }
-    public void getDate(int type){
+    public void getDate(int type){//type?上本下周？
         int i=0;
         Calendar calendar=Calendar.getInstance();
         calendar.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY);
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
-        i=type-1;
+        i=type-1; //根据选择星期变更i
         calendar.add(Calendar.WEEK_OF_YEAR,i);
         date=format.format(calendar.getTime());
     }
@@ -135,7 +135,6 @@ public class Act_Kebiao extends AppCompatActivity {
                         for(int i=0;i<jsonArray.length();i++){
                             JSONArray jsonArray1=jsonObject1.getJSONArray(jsonArray.getString(i));
                             List<Kebiao> kebiaos=new ArrayList<>();
-                            String xq="";
                             for(int s=0;s<jsonArray1.length();s++){
                                 JSONObject object=jsonArray1.getJSONObject(s);
                                 Kebiao kebiao=new Kebiao();

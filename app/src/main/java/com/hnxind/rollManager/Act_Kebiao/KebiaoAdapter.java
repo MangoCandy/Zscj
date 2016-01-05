@@ -64,6 +64,9 @@ public class KebiaoAdapter extends BaseExpandableListAdapter {
         convertView= LayoutInflater.from(parent.getContext()).inflate(R.layout.single_ex_parent,null);
         TextView parenttext=(TextView)convertView.findViewById(R.id.parent);
         parenttext.setText(p[groupPosition]);
+
+        TextView beizhu=(TextView)convertView.findViewById(R.id.parent_beizhu);
+        beizhu.setText(kebiaoMap.get(p[groupPosition]).size()+"节");
         return convertView;
     }
 

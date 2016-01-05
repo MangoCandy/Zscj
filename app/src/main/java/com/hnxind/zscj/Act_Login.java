@@ -4,11 +4,14 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -24,6 +27,7 @@ import com.android.volley.toolbox.Volley;
 import com.hnxind.model.Grid;
 import com.hnxind.model.UserInfo;
 import com.hnxind.model.mUrl;
+import com.hnxind.setting.Theme;
 import com.hnxind.utils.Utils_user;
 
 
@@ -49,9 +53,13 @@ public class Act_Login extends AppCompatActivity {
     CheckBox remember;//记住密码
 
     Context context=this;
+
+    Theme theme;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        theme=new Theme(this);
+
         setContentView(R.layout.activity_login);
         initView();
         getCheck();//获取选中状态
@@ -61,6 +69,7 @@ public class Act_Login extends AppCompatActivity {
                 login(null);
             }
         }
+
 
     }
 
