@@ -60,11 +60,11 @@ public class CostAdapter extends BaseAdapter{
         }else{
             viewHolder= (ViewHolder) convertView.getTag();
         }
-        viewHolder.cost.setText("支出："+cost.getCost());
+        viewHolder.cost.setText("支出："+cost.getCost()+"元");
         viewHolder.decription.setText("描述："+cost.getDescription());
         viewHolder.time.setText("时间："+cost.getTime());
         viewHolder.location.setText("地点："+cost.getLocation());
-        viewHolder.yue.setText("余额："+cost.getYue());
+        viewHolder.yue.setText("余额："+cost.getYue()+"元");
         return convertView;
     }
 }

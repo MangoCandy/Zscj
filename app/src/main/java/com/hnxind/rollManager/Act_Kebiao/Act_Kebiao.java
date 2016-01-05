@@ -121,6 +121,8 @@ public class Act_Kebiao extends AppCompatActivity {
         date=format.format(calendar.getTime());
     }
     public void getKebiao(){
+        swipeRefreshLayout.setRefreshing(true);
+
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         StringRequest stringRequest=new StringRequest(Request.Method.POST, mUrl.gridUrl, new Response.Listener<String>() {
             @Override

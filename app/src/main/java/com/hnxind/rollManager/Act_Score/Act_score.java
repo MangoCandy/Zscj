@@ -142,6 +142,7 @@ public class Act_score extends AppCompatActivity {
     }
     public void getScore(final String date){
         swipeRefreshLayout.setRefreshing(true);
+
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         StringRequest stringRequest=new StringRequest(Request.Method.POST, mUrl.gridUrl, new Response.Listener<String>() {
             @Override

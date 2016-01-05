@@ -103,6 +103,8 @@ public class Act_CostList extends AppCompatActivity {
     }
 
     public void getCostList(final String date){
+        swipeRefreshLayout.setRefreshing(true);
+
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         StringRequest stringRequest=new StringRequest(Request.Method.POST, mUrl.gridUrl, new Response.Listener<String>() {
             @Override

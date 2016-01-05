@@ -2,7 +2,6 @@
 <resources>
     <style name="mStyle" parent="AppTheme.NoActionBar">
         <item name="android:statusBarColor">#00000000</item>
-
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 </resources>
