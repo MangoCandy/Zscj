@@ -3,8 +3,6 @@ package com.hnxind.zscj;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -21,7 +19,8 @@ import com.hnxind.fankui.Act_Fankui;
 import com.hnxind.library.Act_Library;
 import com.hnxind.model.Grid;
 import com.hnxind.model.mUrl;
-import com.hnxind.newStudent.BaoDao.Act_BaoDao;
+import com.hnxind.newStudent.BaoDao.Act_BD;
+import com.hnxind.newStudent.BaoDao.Act_BaoDaoLC;
 import com.hnxind.rollManager.Act_rollManager;
 import com.hnxind.schoolCard.Act_SchoolCard;
 import com.hnxind.utils.Act_WebView;
@@ -106,7 +105,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.mViewHolder> {
                 intent=new Intent(context,Act_Fankui.class);
                 break;
             case "15"://报道信息
-                intent=new Intent(context, Act_BaoDao.class);
+                intent=new Intent(context, Act_BD.class);
                 break;
             case "23"://实名
                 intent=new Intent(context, Act_WebView.class);
@@ -115,7 +114,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.mViewHolder> {
                 break;
             case "24"://百度地图
                 intent=new Intent(context,Act_WebView.class);
-                intent.putExtra("url","http://map.baidu.com/mobile/webapp/index/index/foo=bar/vt=map");
+                intent.putExtra("url","http://map.qq.com/m/index/map");
                 intent.putExtra("title","百度地图");
                 break;
         }

@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.GeolocationPermissions;
 import android.webkit.WebChromeClient;
@@ -27,14 +30,15 @@ public class Act_WebView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
         initView();
-        initDate();
         initToolbar();
-    }
 
+        initDate();
+    }
+    String content;
     private void initDate() {
         Intent intent=getIntent();
         Bundle bundle=intent.getExtras();
-        String content=bundle.getString("content");
+        content=bundle.getString("content");
         title=bundle.getString("title");
         url=bundle.getString("url");
         if(content!=null&&!content.equals("")){
@@ -50,13 +54,15 @@ public class Act_WebView extends AppCompatActivity {
         progressBar.setProgress(0);
         webView=(WebView)findViewById(R.id.webview);
         WebSettings webSettings=webView.getSettings();
+        webSettings.setDatabaseEnabled(true);
         webView.getSettings().setDefaultTextEncodingName("UTF-8");
         webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.getSettings().setDomStorageEnabled(true);
+        webView.setHorizontalScrollBarEnabled(false);
 
         webSettings.setDatabaseEnabled(true);
-        String dir = getDir("database", Context.MODE_PRIVATE).getPath();
+        String dir = this.getApplicationContext().getDir("database", Context.MODE_PRIVATE).getPath();
         //启用地理定位
         webSettings.setGeolocationEnabled(true);
         //设置定位的数据库路径
@@ -103,7 +109,7 @@ public class Act_WebView extends AppCompatActivity {
     }
 
     public void initToolbar(){
-        Theme theme=new Theme(this);
+        final Theme theme=new Theme(this);
 
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         toolbar.setTitle(title);
@@ -118,5 +124,29 @@ public class Act_WebView extends AppCompatActivity {
 
         toolbar.setTitleTextColor(theme.getTitleColor());
         toolbar.setBackgroundColor(theme.getMainColor());
+
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.shuaxin:
+                        if(content!=null&&!content.equals("")){
+                            webView.loadDataWithBaseURL("",content,"text/html","UTF-8","");
+                        }else{
+                            webView.reload();
+                        }
+                        break;
+                }
+                return true;
+            }
+        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater=getMenuInflater();
+        menuInflater.inflate(R.menu.menu_webview,menu);
+        return true;
+
     }
 }

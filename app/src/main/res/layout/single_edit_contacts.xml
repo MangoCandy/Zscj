@@ -20,7 +20,7 @@
                 android:id="@+id/name_head_bg"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="#961c90c6"/>
+                android:src="#78909c"/>
             <TextView
                 android:id="@+id/head_text"
                 android:textColor="#fff"

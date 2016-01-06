@@ -34,8 +34,8 @@ public class Act_Setting extends AppCompatActivity {
     }
 
     String[] colorNames=new String[]{"默认","建城蓝","罗兰紫","少女粉","优雅绿","沁心绿","活力橙","时尚灰","清新蓝"};
-    String[] colorCodes=new String[]{"#93d9fd"/*默认*/,"#0268b1"/*建城蓝*/,"#c2185b"/*罗兰紫*/,"#FFF26E8F"/*少女粉*/
-        ,"#FF2CB38D"/*优雅绿*/,"#009688"/*沁心绿*/,"#e7ef8636"/*活力橙*/,"#607d8b"/*时尚灰*/,"#00bcd4"/*清新蓝*/
+    String[] colorCodes=new String[]{"#00bcd4"/*默认*/,"#0268b1"/*建城蓝*/,"#c2185b"/*罗兰紫*/,"#FFF26E8F"/*少女粉*/
+        ,"#FF2CB38D"/*优雅绿*/,"#009688"/*沁心绿*/,"#e7ef8636"/*活力橙*/,"#607d8b"/*时尚灰*/,"#FF12B6F4"/*清新蓝*/
     };
 
     public void initToolbar(){

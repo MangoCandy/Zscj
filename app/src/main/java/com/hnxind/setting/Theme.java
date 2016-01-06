@@ -30,7 +30,7 @@ public class Theme {
             setTitleColor(sharedPreferences.getInt(Theme.TITLE_COLOR, Color.parseColor("#48809d")));
         }
     }
-    public int MainColor= Color.parseColor("#93d9fd");
+    public int MainColor= Color.parseColor("#00bcd4");
     public int TitleColor= Color.parseColor("#48809d");
 
     public int getMainColor() {

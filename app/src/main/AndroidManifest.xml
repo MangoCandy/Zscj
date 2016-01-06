@@ -11,13 +11,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
@@ -69,7 +66,7 @@
             android:name="com.hnxind.utils.Act_WebView"
             android:label="WebView"
             android:theme="@style/mStyle"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="com.hnxind.schoolCard.Act_SchoolCard"
             android:label="一卡通"
@@ -119,8 +116,16 @@
             android:name="com.hnxind.setting.Act_Setting"
             android:label="个人设置"
             android:theme="@style/mStyle" />
-        <activity android:name="com.hnxind.newStudent.BaoDao.Act_BaoDao"
+        <activity
+            android:name="com.hnxind.newStudent.BaoDao.Act_BaoDaoLC"
+            android:label="报到流程"
+            android:theme="@style/mStyle" />
+        <activity
+            android:name="com.hnxind.newStudent.BaoDao.Act_BD"
             android:label="报到信息"
+            android:theme="@style/mStyle" />
+        <activity android:name="com.hnxind.newStudent.BaoDao.Act_Sushe"
+            android:label="宿舍查询"
             android:theme="@style/mStyle"></activity>
     </application>
 
