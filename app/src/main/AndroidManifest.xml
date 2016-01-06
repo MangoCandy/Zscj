@@ -9,6 +9,16 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:name=".MyApplication"
@@ -21,7 +31,7 @@
             android:name=".Act_Login"
             android:label="@string/login_lable"
             android:theme="@style/loginStyle"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
@@ -57,8 +67,9 @@
             android:theme="@style/mStyle" />
         <activity
             android:name="com.hnxind.utils.Act_WebView"
-            android:label="阅读"
-            android:theme="@style/mStyle" />
+            android:label="WebView"
+            android:theme="@style/mStyle"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name="com.hnxind.schoolCard.Act_SchoolCard"
             android:label="一卡通"
@@ -67,7 +78,7 @@
             android:name="com.hnxind.schoolCard.Act_CostList.Act_CostList"
             android:label="消费查询"
             android:theme="@style/mStyle"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="com.hnxind.personInfo.Act_PersonInfo"
             android:label="个人信息"
@@ -104,8 +115,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.hnxind.setting.Act_Setting"
+        <activity
+            android:name="com.hnxind.setting.Act_Setting"
             android:label="个人设置"
-            android:theme="@style/mStyle"/>
+            android:theme="@style/mStyle" />
+        <activity android:name="com.hnxind.newStudent.BaoDao.Act_BaoDao"
+            android:label="报到信息"
+            android:theme="@style/mStyle"></activity>
     </application>
+
 </manifest>

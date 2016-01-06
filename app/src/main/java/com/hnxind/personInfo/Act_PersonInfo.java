@@ -41,13 +41,17 @@ import java.util.Map;
 public class Act_PersonInfo extends AppCompatActivity {
     Context context=this;
     UserInfo userInfo;
+    Utils_user utils_user;
+
     StudentInfo studentInfo;
     SwipeRefreshLayout swipeRefreshLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person_info);
-        userInfo=(new Utils_user(this)).getUserInfo();
+
+        utils_user=new Utils_user(this);
+        userInfo=utils_user.getUserInfo();
 
         initToolbar();
         initView();

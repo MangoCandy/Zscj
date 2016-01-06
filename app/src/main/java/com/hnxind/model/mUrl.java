@@ -8,6 +8,10 @@ public class mUrl {
     public static String retMessage="retMessage";
     public static String retData="retData";
 
+    public static String mainUrl="http://222.243.167.52:8000/app/";
+
+    public static String shiming="http://g.hn165.com/realsystem/Home/Index";//联通实名
+
     public static String loginUrl="http://222.243.167.52:8000/app/login.php";
 
     public static String iconUrl="http://222.243.167.52:8000/app/icons/";//后拼接图片名

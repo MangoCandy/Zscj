@@ -19,7 +19,9 @@ public class Utils_user {
         editor.putString(UserInfo.IDCARD,userInfo.getIdCard());
         editor.putString(UserInfo.NAME,userInfo.getName());
         editor.putString(UserInfo.ROLE,userInfo.getRole());
-        editor.putString(UserInfo.STUDENT_NUM,userInfo.getStudentnum());
+        if(userInfo.getStudentnum().startsWith("2")){
+            editor.putString(UserInfo.STUDENT_NUM,userInfo.getStudentnum());
+        }
         editor.commit();
     }
     public UserInfo getUserInfo(){//获取用户信息

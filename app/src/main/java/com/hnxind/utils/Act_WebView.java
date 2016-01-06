@@ -1,10 +1,12 @@
 package com.hnxind.utils;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.webkit.GeolocationPermissions;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -46,12 +48,29 @@ public class Act_WebView extends AppCompatActivity {
     public void initView(){
         progressBar=(ProgressBar)findViewById(R.id.progresbar);
         progressBar.setProgress(0);
-
         webView=(WebView)findViewById(R.id.webview);
+        WebSettings webSettings=webView.getSettings();
         webView.getSettings().setDefaultTextEncodingName("UTF-8");
         webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
         webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setDomStorageEnabled(true);
+
+        webSettings.setDatabaseEnabled(true);
+        String dir = getDir("database", Context.MODE_PRIVATE).getPath();
+        //启用地理定位
+        webSettings.setGeolocationEnabled(true);
+        //设置定位的数据库路径
+        webSettings.setGeolocationDatabasePath(dir);
+        webSettings.setAllowFileAccess(true);
+        webSettings.setBlockNetworkImage(false);
+        webSettings.setBlockNetworkLoads(false);
         webView.setWebChromeClient(new WebChromeClient(){
+            @Override
+            public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
+                callback.invoke(origin, true, false);
+                super.onGeolocationPermissionsShowPrompt(origin, callback);
+            }
+
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 if(newProgress<100){

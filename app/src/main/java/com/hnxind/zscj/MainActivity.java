@@ -34,6 +34,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.hnxind.model.Grid;
+import com.hnxind.model.UserInfo;
 import com.hnxind.model.mUrl;
 import com.hnxind.personInfo.Act_PersonInfo;
 import com.hnxind.setting.Act_Setting;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     RecyclerView gridView;
     GridAdapter gridAdapter;
 
+    UserInfo userInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,15 +64,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         initView();
         initToolBar();
         initBroad();
+
+        userInfo=(new Utils_user(context)).getUserInfo();
+        if(userInfo.getStudentnum().equals("")){//手机号登陆 没有学籍号 先接收学籍号
+
+        }
     }
 
-    public void initBroad(){
+    public void initBroad(){//接受广播 修改主题
         MyBroad myBroad=new MyBroad();
         IntentFilter filter=new IntentFilter();
         filter.addAction(Theme.CHANGE_THEME);
         registerReceiver(myBroad,filter);
     }
     DrawerLayout drawer;
+    NavigationView navigationView;
     public void initToolBar(){
         Theme theme=new Theme(this);
 
@@ -86,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView=(NavigationView)findViewById(R.id.navigationView);
+        navigationView=(NavigationView)findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
 
         navigationView=(NavigationView)findViewById(R.id.navigationView);
@@ -160,19 +168,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        if(drawer.isDrawerOpen(navigationView)){
+            drawer.closeDrawers();
+        }else{
+            AlertDialog.Builder builder=new AlertDialog.Builder(this);
 //        View view=LayoutInflater.from(this).inflate(R.layout.nav_header,null);
 //        builder.setCustomTitle(view);
-        builder.setTitle("温馨提示");
-        builder.setMessage("确认退出掌上城建");
-        builder.setNegativeButton("取消",null);
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                finish();
-            }
-        });
-        builder.show();
+            builder.setTitle("温馨提示");
+            builder.setMessage("确认退出掌上城建");
+            builder.setNegativeButton("取消",null);
+            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            builder.show();
+        }
     }
 
     public class MyBroad extends BroadcastReceiver{

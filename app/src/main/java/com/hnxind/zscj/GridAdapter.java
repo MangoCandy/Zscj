@@ -21,6 +21,7 @@ import com.hnxind.fankui.Act_Fankui;
 import com.hnxind.library.Act_Library;
 import com.hnxind.model.Grid;
 import com.hnxind.model.mUrl;
+import com.hnxind.newStudent.BaoDao.Act_BaoDao;
 import com.hnxind.rollManager.Act_rollManager;
 import com.hnxind.schoolCard.Act_SchoolCard;
 import com.hnxind.utils.Act_WebView;
@@ -103,6 +104,19 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.mViewHolder> {
                 break;
             case "22"://建议反馈
                 intent=new Intent(context,Act_Fankui.class);
+                break;
+            case "15"://报道信息
+                intent=new Intent(context, Act_BaoDao.class);
+                break;
+            case "23"://实名
+                intent=new Intent(context, Act_WebView.class);
+                intent.putExtra("url",mUrl.shiming);
+                intent.putExtra("title","联通实名认证");
+                break;
+            case "24"://百度地图
+                intent=new Intent(context,Act_WebView.class);
+                intent.putExtra("url","http://map.baidu.com/mobile/webapp/index/index/foo=bar/vt=map");
+                intent.putExtra("title","百度地图");
                 break;
         }
 
