@@ -2,6 +2,9 @@ package com.hnxind.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -30,9 +33,8 @@ public class Act_WebView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
         initView();
-        initToolbar();
-
         initDate();
+        initToolbar();
     }
     String content;
     private void initDate() {
@@ -108,38 +110,34 @@ public class Act_WebView extends AppCompatActivity {
         }
     }
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                break;
+            case R.id.shuaxin:
+                if(content!=null&&!content.equals("")){
+                    webView.loadDataWithBaseURL("",content,"text/html","UTF-8","");
+                }else{
+                    webView.reload();
+                }
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     public void initToolbar(){
         final Theme theme=new Theme(this);
 
-        Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
-        toolbar.setTitle(title);
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(R.mipmap.iconfont_back);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setBackgroundDrawable(new ColorDrawable(theme.MainColor));
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.mipmap.iconfont_back);
+        actionBar.setTitle(title);
 
-        toolbar.setTitleTextColor(theme.getTitleColor());
-        toolbar.setBackgroundColor(theme.getMainColor());
 
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.shuaxin:
-                        if(content!=null&&!content.equals("")){
-                            webView.loadDataWithBaseURL("",content,"text/html","UTF-8","");
-                        }else{
-                            webView.reload();
-                        }
-                        break;
-                }
-                return true;
-            }
-        });
     }
 
     @Override

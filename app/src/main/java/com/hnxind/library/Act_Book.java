@@ -115,7 +115,6 @@ public class Act_Book extends AppCompatActivity {
                 return false;
             }
         });
-
         listView=(RecyclerView) findViewById(R.id.listview);
         adapter=new BookAdapter(books,context);
         LinearLayoutManager manager=new LinearLayoutManager(this);

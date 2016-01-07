@@ -7,10 +7,16 @@
     tools:openDrawer="start"
     android:id="@+id/drawer_layout"
     >
-    <LinearLayout
+    <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/pic"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/topbacgroud"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             app:titleTextColor="#fff"
@@ -18,14 +24,20 @@
             android:fitsSystemWindows="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_below="@+id/pic"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#153e3e3e"/>
         <android.support.v7.widget.RecyclerView
+            android:layout_below="@+id/pic"
             android:id="@+id/gridView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true">
 
         </android.support.v7.widget.RecyclerView>
-    </LinearLayout>
+    </RelativeLayout>
     <android.support.design.widget.NavigationView
         app:elevation="@null"
         android:id="@+id/navigationView"

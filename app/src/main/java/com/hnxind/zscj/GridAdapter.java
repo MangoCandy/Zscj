@@ -114,7 +114,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.mViewHolder> {
                 break;
             case "24"://百度地图
                 intent=new Intent(context,Act_WebView.class);
-                intent.putExtra("url","http://map.qq.com/m/index/map");
+                intent.putExtra("url","http://ditu.google.cn");
                 intent.putExtra("title","百度地图");
                 break;
         }

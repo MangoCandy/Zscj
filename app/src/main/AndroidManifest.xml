@@ -65,8 +65,9 @@
         <activity
             android:name="com.hnxind.utils.Act_WebView"
             android:label="WebView"
-            android:theme="@style/mStyle"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:theme="@style/AppTheme"
+            android:hardwareAccelerated="true"/>
         <activity
             android:name="com.hnxind.schoolCard.Act_SchoolCard"
             android:label="一卡通"
