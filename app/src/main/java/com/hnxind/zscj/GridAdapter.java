@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.hnxind.CrpSystem.Act_CrpSystem;
 import com.hnxind.fankui.Act_Fankui;
 import com.hnxind.library.Act_Library;
+import com.hnxind.map.Act_Map;
 import com.hnxind.model.Grid;
 import com.hnxind.model.mUrl;
 import com.hnxind.newStudent.BaoDao.Act_BD;
@@ -113,9 +114,9 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.mViewHolder> {
                 intent.putExtra("title","联通实名认证");
                 break;
             case "24"://百度地图
-                intent=new Intent(context,Act_WebView.class);
-                intent.putExtra("url","http://ditu.google.cn");
-                intent.putExtra("title","百度地图");
+                intent=new Intent(context,Act_Map.class);
+//                intent.putExtra("url","http://ditu.google.cn");
+//                intent.putExtra("title","百度地图");
                 break;
         }
 

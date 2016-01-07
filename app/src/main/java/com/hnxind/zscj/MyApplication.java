@@ -2,6 +2,8 @@ package com.hnxind.zscj;
 
 import android.app.Application;
 
+import com.baidu.mapapi.SDKInitializer;
+
 /**
  * Created by mangocandy on 16-1-4.
  */
