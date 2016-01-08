@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.hnxind.map.Act_Map">
     <com.baidu.mapapi.map.MapView
+        android:layout_below="@+id/toolbar"
         android:id="@+id/mapview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
@@ -16,8 +17,8 @@
         android:layout_height="wrap_content"/>
     <android.support.design.widget.FloatingActionButton
         android:onClick="dingwei"
-        app:backgroundTint="#22c0d9"
-        android:src="@mipmap/iconfont_call"
+        app:backgroundTint="#3eaae1"
+        android:src="@mipmap/iconfont_dingwei"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -25,4 +26,24 @@
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="99dp"
         android:layout_marginRight="20dp"/>
+
+    <LinearLayout
+        android:background="#fff"
+        android:layout_margin="20dp"
+        android:layout_alignTop="@+id/mapview"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/qidian"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <Button
+            android:onClick="sousuo"
+            android:text="搜索"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 </RelativeLayout>
