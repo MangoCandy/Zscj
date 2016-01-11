@@ -2,11 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/normal_click">
+    android:background="@drawable/normal_click"
+    android:padding="20dp">
     <TextView
         android:textColor="#607d8b"
         android:layout_margin="10dp"
-        android:textSize="17dp"
+        android:textSize="16dp"
         android:text=""
         android:textStyle="bold"
         android:id="@+id/title"

@@ -5,17 +5,30 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.hnxind.map.Act_Map">
-    <com.baidu.mapapi.map.MapView
-        android:layout_below="@+id/toolbar"
-        android:id="@+id/mapview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
     <android.support.v7.widget.Toolbar
         android:fitsSystemWindows="true"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+    <com.baidu.mapapi.map.MapView
+        android:layout_below="@+id/toolbar"
+        android:id="@+id/mapview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <LinearLayout
+        android:layout_below="@+id/toolbar"
+        android:background="#40585858"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <TextView
+            android:textColor="#fff"
+            android:id="@+id/addr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/dingwei"
         android:onClick="dingwei"
         app:backgroundTint="#3eaae1"
         android:src="@mipmap/iconfont_dingwei"
@@ -24,26 +37,17 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="99dp"
+        android:layout_marginBottom="80dp"
         android:layout_marginRight="20dp"/>
-
-    <LinearLayout
-        android:background="#fff"
-        android:layout_margin="20dp"
-        android:layout_alignTop="@+id/mapview"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/qidian"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content" />
-        <Button
-            android:onClick="sousuo"
-            android:text="搜索"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:layout_above="@id/dingwei"
+        android:onClick="daohang"
+        app:backgroundTint="#fff"
+        android:src="@mipmap/iconfont_guiji"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="20dp"/>
 </RelativeLayout>

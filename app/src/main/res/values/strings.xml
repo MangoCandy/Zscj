@@ -5,8 +5,8 @@
     <!-- Strings related to login -->
     <string name="username">用户名</string>
     <string name="password">密码</string>
-    <string name="login_lable">掌上城建</string>
-    <string name="title_activity_main">掌上城建</string>
+    <string name="login_lable">掌中城建</string>
+    <string name="title_activity_main">掌中城建</string>
     <string name="roll_manager">学籍管理</string>
 
     <string name="hello_world">Hello world!</string>

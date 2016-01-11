@@ -83,7 +83,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Theme theme=new Theme(this);
 
         Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
-//        toolbar.setNavigationIcon(R.mipmap.logo);
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setBackgroundColor(theme.MainColor);

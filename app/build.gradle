@@ -2,10 +2,10 @@ apply plugin: 'com.android.application'
 
 android {
     signingConfigs {
-        release{
+        release {
             keyAlias 'hnxind'
             keyPassword 'hnxind'
-            storeFile file('F:/ZzcjKey.jks')
+            storeFile file('ZzcjKey.jks')
             storePassword 'hnxind'
         }
     }

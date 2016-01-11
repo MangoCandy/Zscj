@@ -1,13 +1,21 @@
 package com.hnxind.map;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
@@ -33,8 +41,11 @@ import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.core.SearchResult;
 import com.baidu.mapapi.search.route.DrivingRouteResult;
 import com.baidu.mapapi.search.route.OnGetRoutePlanResultListener;
+import com.baidu.mapapi.search.route.PlanNode;
 import com.baidu.mapapi.search.route.RoutePlanSearch;
 import com.baidu.mapapi.search.route.SuggestAddrInfo;
+import com.baidu.mapapi.search.route.TransitRouteLine;
+import com.baidu.mapapi.search.route.TransitRoutePlanOption;
 import com.baidu.mapapi.search.route.TransitRouteResult;
 import com.baidu.mapapi.search.route.WalkingRouteResult;
 import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
@@ -50,6 +61,10 @@ public class Act_Map extends AppCompatActivity {
     MapView mapView;
     Context context=this;
     BaiduMap baiduMap;
+    TextView addr;//地名
+    View view;
+    String addttext;//定位地址
+    BDLocation mylocation;
 
     public LocationClient mLocationClient = null;
 
@@ -57,8 +72,12 @@ public class Act_Map extends AppCompatActivity {
     public BDLocationListener myListener = new BDLocationListener() {
         @Override
         public void onReceiveLocation(BDLocation bdLocation) {
+            mylocation=bdLocation;
             LatLng point=new LatLng(bdLocation.getLatitude(),bdLocation.getLongitude());
-            Log.i("asd",bdLocation.getCity()+bdLocation.getStreet());
+            Log.i("asd",bdLocation.getAddrStr());
+            addttext=bdLocation.getCity()+bdLocation.getStreet()+bdLocation.getAddrStr();
+            if(addr!=null){addr.setText(addttext.replaceAll("nullnullnull","定位失败，尝试开启网络或GPS权限之后重新定位"));}
+
             mLocationClient.stop();
             //定义地图状态
             MapStatus mMapStatus = new MapStatus.Builder()
@@ -85,9 +104,11 @@ public class Act_Map extends AppCompatActivity {
         mLocationClient = new LocationClient(getApplicationContext());     //声明LocationClient类
         mLocationClient.registerLocationListener( myListener );    //注册监听函数
         initLocation();
-        setContentView(R.layout.activity_map);
+        view=LayoutInflater.from(this).inflate(R.layout.activity_map,null);
+        setContentView(view);
         initToolbar();
         initView();
+
         dingwei(null);
     }
 
@@ -134,6 +155,8 @@ public class Act_Map extends AppCompatActivity {
     }
 
     public void initView(){
+        addr=(TextView)findViewById(R.id.addr);
+
         mapView=(MapView)findViewById(R.id.mapview);
         mapView.showZoomControls(false);
 
@@ -147,28 +170,79 @@ public class Act_Map extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        mapView.onResume();
+        if(mapView!=null){
+            mapView.onResume();
+        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mapView.onPause();
+        if(mapView!=null){
+            mapView.onPause();
+        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mapView.onDestroy();
+        if(mapView!=null){
+            mapView.onDestroy();
+        }
     }
 
-    public void dingwei(View view) {
+    public void dingwei(View view) {//定位
         mLocationClient.start();
+    }
+    PopupWindow daohang;
+    public void daohang(View view) {//导航
+        RoutePlanSearch search=RoutePlanSearch.newInstance();
+        OnGetRoutePlanResultListener listener=new OnGetRoutePlanResultListener() {
+            @Override
+            public void onGetWalkingRouteResult(WalkingRouteResult walkingRouteResult) {
 
+            }
+
+            @Override
+            public void onGetTransitRouteResult(TransitRouteResult transitRouteResult) {
+                List<TransitRouteLine> lines=transitRouteResult.getRouteLines();
+                for(TransitRouteLine line:lines){
+                    Log.i("asd",line.getTitle());
+                }
+            }
+
+            @Override
+            public void onGetDrivingRouteResult(DrivingRouteResult drivingRouteResult) {
+
+            }
+        };
+        mylocation.getLocationWhere();
+        PlanNode stNode = PlanNode.withCityNameAndPlaceName(mylocation.getCity(),mylocation.getStreet()+mylocation.getAddrStr());
+        PlanNode enNode = PlanNode.withCityNameAndPlaceName(mylocation.getCity(), "湖南工业职业技术学院");
+        search.setOnGetRoutePlanResultListener(listener);
+        search.transitSearch(new TransitRoutePlanOption()
+        .from(stNode).to(enNode).city(mylocation.getCity()));
+
+//        daohang=new PopupWindow(this);
+//        daohang.setContentView(LayoutInflater.from(this).inflate(R.layout.pop_daohang,null));
+//        daohang.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
+//        daohang.setHeight(LinearLayout.LayoutParams.MATCH_PARENT);
+//        daohang.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//        daohang.setFocusable(true);
+//        daohang.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+//        daohang.showAtLocation(this.view,Gravity.BOTTOM,0,0);
     }
 
-    public void sousuo(View view) {
-        String text=((EditText)findViewById(R.id.qidian)).getText().toString();
+    @Override
+    public void onBackPressed() {
+        if(daohang!=null&&daohang.isShowing()){
+            daohang.dismiss();
+            return;
+        }
+        super.onBackPressed();
+    }
+
+        public void sousuo(View view) {
         RoutePlanSearch search=RoutePlanSearch.newInstance();
         SuggestionSearch mSuggestionSearch = SuggestionSearch.newInstance();
         OnGetSuggestionResultListener listener = new OnGetSuggestionResultListener() {
@@ -185,7 +259,6 @@ public class Act_Map extends AppCompatActivity {
             }
         };
         mSuggestionSearch.setOnGetSuggestionResultListener(listener);
-        mSuggestionSearch.requestSuggestion(new SuggestionSearchOption().city("长沙").keyword(text));
-
+        mSuggestionSearch.requestSuggestion(new SuggestionSearchOption().city("长沙").keyword(addttext));
     }
 }
