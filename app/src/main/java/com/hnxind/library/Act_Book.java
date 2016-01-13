@@ -96,7 +96,6 @@ public class Act_Book extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 type="0"+(position+1);
-                Log.i("asd",type);
             }
 
             @Override

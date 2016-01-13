@@ -114,10 +114,10 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.mViewHolder> {
                 intent.putExtra("title","联通实名认证");
                 break;
             case "24"://百度地图
-//                intent=new Intent(context,Act_Map.class);
-                intent=new Intent(context,Act_WebView.class);
-                intent.putExtra("url","http://map.baidu.com/mobile/webapp/index/index/foo=bar/vt=map");
-                intent.putExtra("title","百度地图");
+                intent=new Intent(context,Act_Map.class);
+//                intent=new Intent(context,Act_WebView.class);
+//                intent.putExtra("url","http://map.baidu.com/mobile/webapp/index/index/foo=bar/vt=map");
+//                intent.putExtra("title","百度地图");
                 break;
         }
 

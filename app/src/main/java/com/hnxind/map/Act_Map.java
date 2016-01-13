@@ -75,8 +75,8 @@ public class Act_Map extends AppCompatActivity {
             mylocation=bdLocation;
             LatLng point=new LatLng(bdLocation.getLatitude(),bdLocation.getLongitude());
             Log.i("asd",bdLocation.getAddrStr());
-            addttext=bdLocation.getCity()+bdLocation.getStreet()+bdLocation.getAddrStr();
-            if(addr!=null){addr.setText(addttext.replaceAll("nullnullnull","定位失败，尝试开启网络或GPS权限之后重新定位"));}
+            addttext=bdLocation.getAddrStr();
+            if(addr!=null){addr.setText(addttext.replaceAll("null","定位失败，尝试开启网络或GPS权限之后重新定位"));}
 
             mLocationClient.stop();
             //定义地图状态
