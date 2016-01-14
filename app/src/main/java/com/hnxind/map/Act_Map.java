@@ -12,11 +12,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -196,41 +192,11 @@ public class Act_Map extends AppCompatActivity {
     }
     PopupWindow daohang;
     public void daohang(View view) {//导航
-        RoutePlanSearch search=RoutePlanSearch.newInstance();
-        OnGetRoutePlanResultListener listener=new OnGetRoutePlanResultListener() {
-            @Override
-            public void onGetWalkingRouteResult(WalkingRouteResult walkingRouteResult) {
+        if(!mylocation.getCity().equals("湘潭")){
+            Toast.makeText(this,"请在湘潭境内使用",Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-            }
-
-            @Override
-            public void onGetTransitRouteResult(TransitRouteResult transitRouteResult) {
-                List<TransitRouteLine> lines=transitRouteResult.getRouteLines();
-                for(TransitRouteLine line:lines){
-                    Log.i("asd",line.getTitle());
-                }
-            }
-
-            @Override
-            public void onGetDrivingRouteResult(DrivingRouteResult drivingRouteResult) {
-
-            }
-        };
-        mylocation.getLocationWhere();
-        PlanNode stNode = PlanNode.withCityNameAndPlaceName(mylocation.getCity(),mylocation.getStreet()+mylocation.getAddrStr());
-        PlanNode enNode = PlanNode.withCityNameAndPlaceName(mylocation.getCity(), "湖南工业职业技术学院");
-        search.setOnGetRoutePlanResultListener(listener);
-        search.transitSearch(new TransitRoutePlanOption()
-        .from(stNode).to(enNode).city(mylocation.getCity()));
-
-//        daohang=new PopupWindow(this);
-//        daohang.setContentView(LayoutInflater.from(this).inflate(R.layout.pop_daohang,null));
-//        daohang.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
-//        daohang.setHeight(LinearLayout.LayoutParams.MATCH_PARENT);
-//        daohang.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//        daohang.setFocusable(true);
-//        daohang.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
-//        daohang.showAtLocation(this.view,Gravity.BOTTOM,0,0);
     }
 
     @Override

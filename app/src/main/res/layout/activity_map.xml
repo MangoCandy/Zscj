@@ -30,6 +30,7 @@
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/dingwei"
         android:onClick="dingwei"
+        app:fabSize="mini"
         app:backgroundTint="#3eaae1"
         android:src="@mipmap/iconfont_dingwei"
         android:layout_width="wrap_content"
@@ -48,6 +49,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="25dp"
         android:layout_marginRight="20dp"/>
 </RelativeLayout>
