@@ -19,20 +19,40 @@
         android:layout_height="match_parent">
         <LinearLayout
             android:padding="20dp"
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                style="@style/score_text"
-                android:id="@+id/house"
-                android:layout_marginBottom="10dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <android.support.v7.widget.CardView
+                app:cardElevation="1dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <TextView
-                style="@style/score_text"
-                android:id="@+id/room"
+                android:layout_height="60dp"
+                android:layout_marginBottom="10dp">
+                <TextView
+                    android:layout_margin="20dp"
+                    android:text="宿舍楼栋："
+                    style="@style/score_text"
+                    android:id="@+id/house"
+                    android:textSize="15dp"
+                    android:textStyle="normal"
+                    android:textColor="#727272"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                app:cardElevation="1dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="60dp">
+                <TextView
+                    android:layout_margin="20dp"
+                    android:text="宿舍房间"
+                    android:textSize="15dp"
+                    android:textStyle="normal"
+                    android:textColor="#727272"
+                    style="@style/score_text"
+                    android:id="@+id/room"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </android.support.v7.widget.CardView>
         </LinearLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

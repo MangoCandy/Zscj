@@ -31,16 +31,9 @@ import com.baidu.mapapi.map.Overlay;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.UiSettings;
 import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.search.core.SearchResult;
-import com.baidu.mapapi.search.route.DrivingRouteResult;
-import com.baidu.mapapi.search.route.OnGetRoutePlanResultListener;
-import com.baidu.mapapi.search.route.PlanNode;
+
 import com.baidu.mapapi.search.route.RoutePlanSearch;
-import com.baidu.mapapi.search.route.SuggestAddrInfo;
-import com.baidu.mapapi.search.route.TransitRouteLine;
-import com.baidu.mapapi.search.route.TransitRoutePlanOption;
-import com.baidu.mapapi.search.route.TransitRouteResult;
-import com.baidu.mapapi.search.route.WalkingRouteResult;
+
 import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
 import com.baidu.mapapi.search.sug.SuggestionResult;
 import com.baidu.mapapi.search.sug.SuggestionSearch;
@@ -97,8 +90,7 @@ public class Act_Map extends AppCompatActivity {
         mLocationClient = new LocationClient(getApplicationContext());     //声明LocationClient类
         mLocationClient.registerLocationListener( myListener );    //注册监听函数
         initLocation();
-        view=LayoutInflater.from(this).inflate(R.layout.activity_map,null);
-        setContentView(view);
+        setContentView(R.layout.activity_map);
         initToolbar();
         initView();
 
@@ -163,25 +155,21 @@ public class Act_Map extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(mapView!=null){
-            mapView.onResume();
-        }
+        mapView.onResume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if(mapView!=null){
-            mapView.onPause();
-        }
+        mapView.onPause();
     }
 
     @Override
     protected void onDestroy() {
+        mapView=null;
+        finish();
         super.onDestroy();
-        if(mapView!=null){
-            mapView.onDestroy();
-        }
+//        mapView.onDestroy();
     }
 
     public void dingwei(View view) {//定位
