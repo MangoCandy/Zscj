@@ -166,10 +166,8 @@ public class Act_Map extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        mapView=null;
-        finish();
         super.onDestroy();
-//        mapView.onDestroy();
+        mapView.onDestroy();
     }
 
     public void dingwei(View view) {//定位

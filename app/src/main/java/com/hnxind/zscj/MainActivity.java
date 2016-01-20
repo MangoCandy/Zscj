@@ -66,9 +66,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         initBroad();
 
         userInfo=(new Utils_user(context)).getUserInfo();
-        if(userInfo.getStudentnum().equals("")){//手机号登陆 没有学籍号 先接收学籍号
-
-        }
+//        if(userInfo.getStudentnum().equals("")){//手机号登陆 没有学籍号 先接收学籍号
+//
+//        }
     }
 
     public void initBroad(){//接受广播 修改主题

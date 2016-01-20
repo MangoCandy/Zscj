@@ -15,7 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.hnxind.zscj.MyApplication;
+
 import com.hnxind.zscj.R;
 
 import java.util.HashMap;
