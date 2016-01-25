@@ -70,9 +70,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //
 //        }
     }
-
+    MyBroad myBroad;
     public void initBroad(){//接受广播 修改主题
-        MyBroad myBroad=new MyBroad();
+        myBroad=new MyBroad();
         IntentFilter filter=new IntentFilter();
         filter.addAction(Theme.CHANGE_THEME);
         registerReceiver(myBroad,filter);
@@ -184,6 +184,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             });
             builder.show();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(myBroad);
     }
 
     public class MyBroad extends BroadcastReceiver{

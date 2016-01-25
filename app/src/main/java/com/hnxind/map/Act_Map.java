@@ -32,8 +32,14 @@ import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.UiSettings;
 import com.baidu.mapapi.model.LatLng;
 
+import com.baidu.mapapi.search.route.DrivingRouteResult;
+import com.baidu.mapapi.search.route.OnGetRoutePlanResultListener;
+import com.baidu.mapapi.search.route.PlanNode;
 import com.baidu.mapapi.search.route.RoutePlanSearch;
 
+import com.baidu.mapapi.search.route.TransitRoutePlanOption;
+import com.baidu.mapapi.search.route.TransitRouteResult;
+import com.baidu.mapapi.search.route.WalkingRouteResult;
 import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
 import com.baidu.mapapi.search.sug.SuggestionResult;
 import com.baidu.mapapi.search.sug.SuggestionSearch;
@@ -175,9 +181,11 @@ public class Act_Map extends AppCompatActivity {
     }
     PopupWindow daohang;
     public void daohang(View view) {//导航
-        if(!mylocation.getCity().equals("湘潭")){
-            Toast.makeText(this,"请在湘潭境内使用",Toast.LENGTH_SHORT).show();
+        if(!mylocation.getCity().equals("长沙市")){
+            Toast.makeText(this,mylocation.getCity(),Toast.LENGTH_SHORT).show();
             return;
+        }else{
+            search();
         }
 
     }
@@ -191,23 +199,33 @@ public class Act_Map extends AppCompatActivity {
         super.onBackPressed();
     }
 
-        public void sousuo(View view) {
+    public void search(){
         RoutePlanSearch search=RoutePlanSearch.newInstance();
-        SuggestionSearch mSuggestionSearch = SuggestionSearch.newInstance();
-        OnGetSuggestionResultListener listener = new OnGetSuggestionResultListener() {
-            public void onGetSuggestionResult(SuggestionResult res) {
-                if (res == null || res.getAllSuggestions() == null) {
-                    return;
-                    //未找到相关结果
-                }
-                List<SuggestionResult.SuggestionInfo> infos= res.getAllSuggestions();
-                for(SuggestionResult.SuggestionInfo info:infos){
-                    Log.i("asd",info.district+":"+info.uid+":"+info.key);
-                }
-                //获取在线建议检索结果
+        OnGetRoutePlanResultListener listener=new OnGetRoutePlanResultListener() {
+            @Override
+            public void onGetWalkingRouteResult(WalkingRouteResult walkingRouteResult) {
+                Log.i("asd","1");
+            }
+
+            @Override
+            public void onGetTransitRouteResult(TransitRouteResult transitRouteResult) {
+                Log.i("asd","2");
+                transitRouteResult.
+            }
+
+            @Override
+            public void onGetDrivingRouteResult(DrivingRouteResult drivingRouteResult) {
+                Log.i("asd","3");
             }
         };
-        mSuggestionSearch.setOnGetSuggestionResultListener(listener);
-        mSuggestionSearch.requestSuggestion(new SuggestionSearchOption().city("长沙").keyword(addttext));
+
+        PlanNode stNode = PlanNode.withCityNameAndPlaceName("长沙", "湖南工业职业技术学院");
+        PlanNode enNode = PlanNode.withCityNameAndPlaceName("长沙", "省少管所公交车站");
+        search.setOnGetRoutePlanResultListener(listener);
+        search.transitSearch((new TransitRoutePlanOption())
+                .from(stNode)
+                .city("长沙")
+                .to(enNode));
+//        search.destroy();
     }
 }
