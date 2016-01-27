@@ -123,11 +123,7 @@
             android:name=".Act_Wellcome"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="com.hnxind.setting.Act_Setting"
@@ -148,7 +144,13 @@
         <activity
             android:name="com.hnxind.map.Act_Map"
             android:label="百度地图"
-            android:theme="@style/mStyle" />
+            android:theme="@style/mStyle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

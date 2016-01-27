@@ -32,11 +32,16 @@ import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.UiSettings;
 import com.baidu.mapapi.model.LatLng;
 
+import com.baidu.mapapi.search.core.CityInfo;
+import com.baidu.mapapi.search.core.PoiInfo;
+import com.baidu.mapapi.search.core.SearchResult;
 import com.baidu.mapapi.search.route.DrivingRouteResult;
 import com.baidu.mapapi.search.route.OnGetRoutePlanResultListener;
 import com.baidu.mapapi.search.route.PlanNode;
 import com.baidu.mapapi.search.route.RoutePlanSearch;
 
+import com.baidu.mapapi.search.route.SuggestAddrInfo;
+import com.baidu.mapapi.search.route.TransitRouteLine;
 import com.baidu.mapapi.search.route.TransitRoutePlanOption;
 import com.baidu.mapapi.search.route.TransitRouteResult;
 import com.baidu.mapapi.search.route.WalkingRouteResult;
@@ -49,7 +54,7 @@ import com.hnxind.zscj.R;
 
 import java.util.List;
 
-public class Act_Map extends AppCompatActivity {
+public class Act_Map extends AppCompatActivity implements OnGetRoutePlanResultListener {
     MapView mapView;
     Context context=this;
     BaiduMap baiduMap;
@@ -201,31 +206,53 @@ public class Act_Map extends AppCompatActivity {
 
     public void search(){
         RoutePlanSearch search=RoutePlanSearch.newInstance();
-        OnGetRoutePlanResultListener listener=new OnGetRoutePlanResultListener() {
-            @Override
-            public void onGetWalkingRouteResult(WalkingRouteResult walkingRouteResult) {
-                Log.i("asd","1");
-            }
-
-            @Override
-            public void onGetTransitRouteResult(TransitRouteResult transitRouteResult) {
-                Log.i("asd","2");
-                transitRouteResult.
-            }
-
-            @Override
-            public void onGetDrivingRouteResult(DrivingRouteResult drivingRouteResult) {
-                Log.i("asd","3");
-            }
-        };
-
-        PlanNode stNode = PlanNode.withCityNameAndPlaceName("长沙", "湖南工业职业技术学院");
-        PlanNode enNode = PlanNode.withCityNameAndPlaceName("长沙", "省少管所公交车站");
-        search.setOnGetRoutePlanResultListener(listener);
+        PlanNode stNode = PlanNode.withCityNameAndPlaceName("长沙",mylocation.getStreet());
+        PlanNode enNode = PlanNode.withCityNameAndPlaceName("长沙", "湖南工业职业技术学院");
+        search.setOnGetRoutePlanResultListener(this);
         search.transitSearch((new TransitRoutePlanOption())
                 .from(stNode)
                 .city("长沙")
                 .to(enNode));
 //        search.destroy();
+    }
+
+    @Override
+    public void onGetWalkingRouteResult(WalkingRouteResult walkingRouteResult) {
+        if (walkingRouteResult == null || walkingRouteResult.error != SearchResult.ERRORNO.NO_ERROR) {
+            Toast.makeText(this, "抱歉，未找到结果", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onGetTransitRouteResult(TransitRouteResult transitRouteResult) {
+        if (transitRouteResult == null || transitRouteResult.error != SearchResult.ERRORNO.NO_ERROR) {
+            Toast.makeText(this, "抱歉，未找到结果", Toast.LENGTH_SHORT).show();
+        }else if(transitRouteResult.error == SearchResult.ERRORNO.AMBIGUOUS_ROURE_ADDR) {
+            // 起终点或途经点地址有岐义，通过以下接口获取建议查询信息
+            Toast.makeText(this, "选择正确结果", Toast.LENGTH_SHORT).show();
+            SuggestAddrInfo suggestAddrInfo=transitRouteResult.getSuggestAddrInfo();
+            List<PoiInfo> infos=suggestAddrInfo.getSuggestStartNode();
+            for(PoiInfo info:infos){
+                Log.i("asd",info.address);
+            }
+            return;
+        }else{
+            List<TransitRouteLine> routeLines=transitRouteResult.getRouteLines();
+            for(TransitRouteLine routeLine:routeLines){
+                List<TransitRouteLine.TransitStep> transitSteps=routeLine.getAllStep();
+                for(TransitRouteLine.TransitStep transitStep:transitSteps){
+                    transitStep.getInstructions();
+                    Log.i("asd",transitStep.getInstructions());
+                }
+                Log.i("asd","哈哈哈");
+            }
+        }
+    }
+
+    @Override
+    public void onGetDrivingRouteResult(DrivingRouteResult drivingRouteResult) {
+        if (drivingRouteResult == null || drivingRouteResult.error != SearchResult.ERRORNO.NO_ERROR) {
+            Toast.makeText(this, "抱歉，未找到结果", Toast.LENGTH_SHORT).show();
+        }
     }
 }
