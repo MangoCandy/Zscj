@@ -30,7 +30,6 @@
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/dingwei"
         android:onClick="dingwei"
-        app:fabSize="mini"
         app:backgroundTint="#3eaae1"
         android:src="@mipmap/iconfont_dingwei"
         android:layout_width="wrap_content"
@@ -40,9 +39,39 @@
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="80dp"
         android:layout_marginRight="20dp"/>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/goType"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/dingwei"
+        android:layout_toLeftOf="@+id/view"
+        android:layout_toStartOf="@+id/view">
+       <android.support.design.widget.FloatingActionButton
+           android:onClick="searchWalk"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:src="@mipmap/iconfont_contextwalk"
+           android:layout_marginBottom="10dp"
+           app:backgroundTint="#8f8f8f"
+           app:elevation="0dp"
+           app:fabSize="mini"/>
+        <android.support.design.widget.FloatingActionButton
+            android:onClick="searchBus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/iconfont_bus"
+            app:backgroundTint="#8f8f8f"
+            app:elevation="0dp"
+            app:fabSize="mini"/>
+    </LinearLayout>
+
     <android.support.design.widget.FloatingActionButton
         android:layout_above="@id/dingwei"
-        android:onClick="daohang"
+        android:onClick="gotype"
         app:backgroundTint="#fff"
         android:src="@mipmap/iconfont_guiji"
         android:layout_width="wrap_content"
@@ -50,5 +79,6 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="25dp"
-        android:layout_marginRight="20dp"/>
+        android:layout_marginRight="20dp"
+        android:id="@+id/view" />
 </RelativeLayout>

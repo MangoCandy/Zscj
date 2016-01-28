@@ -6,8 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
 
@@ -15,7 +13,6 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.baidu.mapapi.BMapManager;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
@@ -25,14 +22,11 @@ import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MarkerOptions;
-import com.baidu.mapapi.map.MyLocationConfiguration;
-import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.Overlay;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.UiSettings;
 import com.baidu.mapapi.model.LatLng;
 
-import com.baidu.mapapi.search.core.CityInfo;
 import com.baidu.mapapi.search.core.PoiInfo;
 import com.baidu.mapapi.search.core.SearchResult;
 import com.baidu.mapapi.search.route.DrivingRouteResult;
@@ -44,12 +38,13 @@ import com.baidu.mapapi.search.route.SuggestAddrInfo;
 import com.baidu.mapapi.search.route.TransitRouteLine;
 import com.baidu.mapapi.search.route.TransitRoutePlanOption;
 import com.baidu.mapapi.search.route.TransitRouteResult;
+import com.baidu.mapapi.search.route.WalkingRouteLine;
+import com.baidu.mapapi.search.route.WalkingRoutePlanOption;
 import com.baidu.mapapi.search.route.WalkingRouteResult;
-import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
-import com.baidu.mapapi.search.sug.SuggestionResult;
-import com.baidu.mapapi.search.sug.SuggestionSearch;
-import com.baidu.mapapi.search.sug.SuggestionSearchOption;
 import com.hnxind.setting.Theme;
+import com.hnxind.utils.OverlayManager;
+import com.hnxind.utils.TransitRouteOverlay;
+import com.hnxind.utils.WalkingRouteOverlay;
 import com.hnxind.zscj.R;
 
 import java.util.List;
@@ -63,6 +58,7 @@ public class Act_Map extends AppCompatActivity implements OnGetRoutePlanResultLi
     String addttext;//定位地址
     BDLocation mylocation;
 
+    OverlayManager overlayManager=null;
     public LocationClient mLocationClient = null;
 
     OverlayOptions positionIcon;
@@ -104,6 +100,7 @@ public class Act_Map extends AppCompatActivity implements OnGetRoutePlanResultLi
         setContentView(R.layout.activity_map);
         initToolbar();
         initView();
+        initSearch();
 
         dingwei(null);
     }
@@ -178,48 +175,76 @@ public class Act_Map extends AppCompatActivity implements OnGetRoutePlanResultLi
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        search.destroy();
         mapView.onDestroy();
     }
 
     public void dingwei(View view) {//定位
         mLocationClient.start();
     }
-    PopupWindow daohang;
-    public void daohang(View view) {//导航
-        if(!mylocation.getCity().equals("长沙市")){
-            Toast.makeText(this,mylocation.getCity(),Toast.LENGTH_SHORT).show();
-            return;
-        }else{
-            search();
-        }
-
-    }
 
     @Override
     public void onBackPressed() {
-        if(daohang!=null&&daohang.isShowing()){
-            daohang.dismiss();
-            return;
-        }
         super.onBackPressed();
     }
 
-    public void search(){
-        RoutePlanSearch search=RoutePlanSearch.newInstance();
+    RoutePlanSearch search;
+    public void initSearch(){
+        search=RoutePlanSearch.newInstance();
+        search.setOnGetRoutePlanResultListener(this);
+    }
+    public void searchBus(View view){
+        initSearch();
+        if(!mylocation.getCity().equals("长沙市")){
+            Toast.makeText(this,mylocation.getCity(),Toast.LENGTH_SHORT).show();
+            return;
+        }
         PlanNode stNode = PlanNode.withCityNameAndPlaceName("长沙",mylocation.getStreet());
         PlanNode enNode = PlanNode.withCityNameAndPlaceName("长沙", "湖南工业职业技术学院");
-        search.setOnGetRoutePlanResultListener(this);
         search.transitSearch((new TransitRoutePlanOption())
                 .from(stNode)
                 .city("长沙")
                 .to(enNode));
-//        search.destroy();
     }
 
+
+    public void searchWalk(View view){
+        initSearch();
+        if(!mylocation.getCity().equals("长沙市")){
+            Toast.makeText(this,mylocation.getCity(),Toast.LENGTH_SHORT).show();
+            return;
+        }
+        PlanNode stNode = PlanNode.withCityNameAndPlaceName("长沙",mylocation.getStreet());
+        PlanNode enNode = PlanNode.withCityNameAndPlaceName("长沙", "湖南工业职业技术学院");
+        search.walkingSearch((new WalkingRoutePlanOption())
+                .from(stNode).to(enNode));
+    }
     @Override
     public void onGetWalkingRouteResult(WalkingRouteResult walkingRouteResult) {
         if (walkingRouteResult == null || walkingRouteResult.error != SearchResult.ERRORNO.NO_ERROR) {
             Toast.makeText(this, "抱歉，未找到结果", Toast.LENGTH_SHORT).show();
+        }
+        if (walkingRouteResult.error == SearchResult.ERRORNO.AMBIGUOUS_ROURE_ADDR) {
+            // 起终点或途经点地址有岐义，通过以下接口获取建议查询信息
+            // result.getSuggestAddrInfo()
+            return;
+        }
+        if (walkingRouteResult.error == SearchResult.ERRORNO.NO_ERROR) {
+            if(overlayManager!=null){
+                overlayManager.removeFromMap();
+            }
+            WalkingRouteOverlay overlay=new WalkingRouteOverlay(baiduMap);
+            overlay.setData(walkingRouteResult.getRouteLines().get(0));
+            overlayManager=overlay;
+            //将公交路线规划覆盖物添加到地图中
+            overlayManager.addToMap();
+            overlayManager.zoomToSpan();
+
+            List<WalkingRouteLine> routeLines=walkingRouteResult.getRouteLines();
+            List<WalkingRouteLine.WalkingStep> steps=routeLines.get(0).getAllStep();
+            for(WalkingRouteLine.WalkingStep step:steps){
+                Log.i("asd",step.getInstructions());
+            }
         }
     }
 
@@ -239,6 +264,15 @@ public class Act_Map extends AppCompatActivity implements OnGetRoutePlanResultLi
         }else{
             List<TransitRouteLine> routeLines=transitRouteResult.getRouteLines();
             for(TransitRouteLine routeLine:routeLines){
+                TransitRouteOverlay overlay=new TransitRouteOverlay(baiduMap);
+                overlay.setData(routeLine);
+                if(overlayManager!=null){
+                    overlayManager.removeFromMap();
+                }
+                overlayManager=overlay;
+                //将公交路线规划覆盖物添加到地图中
+                overlayManager.addToMap();
+                overlayManager.zoomToSpan();
                 List<TransitRouteLine.TransitStep> transitSteps=routeLine.getAllStep();
                 for(TransitRouteLine.TransitStep transitStep:transitSteps){
                     transitStep.getInstructions();
@@ -253,6 +287,19 @@ public class Act_Map extends AppCompatActivity implements OnGetRoutePlanResultLi
     public void onGetDrivingRouteResult(DrivingRouteResult drivingRouteResult) {
         if (drivingRouteResult == null || drivingRouteResult.error != SearchResult.ERRORNO.NO_ERROR) {
             Toast.makeText(this, "抱歉，未找到结果", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    LinearLayout gotype;
+    public void gotype(View view) {
+        if(gotype==null){
+            gotype=(LinearLayout)findViewById(R.id.goType);
+        }
+        if(gotype.getVisibility()==View.VISIBLE){
+            gotype.setVisibility(View.GONE);
+        }else{
+            gotype.setVisibility(View.VISIBLE);
         }
     }
 }
