@@ -2,6 +2,7 @@ package com.hnxind.map;
 
 import android.content.Context;
 import android.graphics.Point;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -41,12 +42,14 @@ import com.baidu.mapapi.search.route.TransitRouteResult;
 import com.baidu.mapapi.search.route.WalkingRouteLine;
 import com.baidu.mapapi.search.route.WalkingRoutePlanOption;
 import com.baidu.mapapi.search.route.WalkingRouteResult;
+import com.baidu.mapapi.utils.DistanceUtil;
 import com.hnxind.setting.Theme;
 import com.hnxind.utils.OverlayManager;
 import com.hnxind.utils.TransitRouteOverlay;
 import com.hnxind.utils.WalkingRouteOverlay;
 import com.hnxind.zscj.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Act_Map extends AppCompatActivity implements OnGetRoutePlanResultListener {
@@ -60,6 +63,8 @@ public class Act_Map extends AppCompatActivity implements OnGetRoutePlanResultLi
 
     OverlayManager overlayManager=null;
     public LocationClient mLocationClient = null;
+
+    List<String> luxians=new ArrayList<>();
 
     OverlayOptions positionIcon;
     public BDLocationListener myListener = new BDLocationListener() {
@@ -147,7 +152,11 @@ public class Act_Map extends AppCompatActivity implements OnGetRoutePlanResultLi
 
     }
 
+    LuxianAdapter adapter;
     public void initView(){
+        dingwei=(FloatingActionButton)findViewById(R.id.dingwei);
+        luxian=(FloatingActionButton)findViewById(R.id.view);
+
         addr=(TextView)findViewById(R.id.addr);
 
         mapView=(MapView)findViewById(R.id.mapview);
@@ -159,6 +168,13 @@ public class Act_Map extends AppCompatActivity implements OnGetRoutePlanResultLi
 
         uiSettings.setCompassEnabled(true);
         uiSettings.setCompassPosition(new Point(200,200));
+
+        bottom=(LinearLayout)findViewById(R.id.bottom) ;
+        tips=(TextView)findViewById(R.id.tips);
+        bottomlist=(LinearLayout)findViewById(R.id.bottomlist);
+        listView=(ListView)findViewById(R.id.listview);
+        adapter=new LuxianAdapter(luxians,this);
+        listView.setAdapter(adapter);
     }
     @Override
     protected void onResume() {
@@ -199,8 +215,9 @@ public class Act_Map extends AppCompatActivity implements OnGetRoutePlanResultLi
             Toast.makeText(this,mylocation.getCity(),Toast.LENGTH_SHORT).show();
             return;
         }
-        PlanNode stNode = PlanNode.withCityNameAndPlaceName("长沙",mylocation.getStreet());
-        PlanNode enNode = PlanNode.withCityNameAndPlaceName("长沙", "湖南工业职业技术学院");
+        LatLng latLng=new LatLng(mylocation.getLatitude(),mylocation.getLongitude());
+        PlanNode stNode=PlanNode.withCityNameAndPlaceName("湘潭","湘潭火车站");
+        PlanNode enNode = PlanNode.withCityNameAndPlaceName("湘潭","湖南城建职业技术学院高新校区(南门)");
         search.transitSearch((new TransitRoutePlanOption())
                 .from(stNode)
                 .city("长沙")
@@ -214,13 +231,16 @@ public class Act_Map extends AppCompatActivity implements OnGetRoutePlanResultLi
             Toast.makeText(this,mylocation.getCity(),Toast.LENGTH_SHORT).show();
             return;
         }
-        PlanNode stNode = PlanNode.withCityNameAndPlaceName("长沙",mylocation.getStreet());
-        PlanNode enNode = PlanNode.withCityNameAndPlaceName("长沙", "湖南工业职业技术学院");
+        LatLng latLng=new LatLng(mylocation.getLatitude(),mylocation.getLongitude());
+        PlanNode stNode=PlanNode.withLocation(latLng);
+        PlanNode enNode = PlanNode.withCityNameAndPlaceName("湘潭","湖南城建职业技术学院高新校区(南门)");
         search.walkingSearch((new WalkingRoutePlanOption())
                 .from(stNode).to(enNode));
     }
     @Override
     public void onGetWalkingRouteResult(WalkingRouteResult walkingRouteResult) {
+        gotype.setVisibility(View.GONE);
+
         if (walkingRouteResult == null || walkingRouteResult.error != SearchResult.ERRORNO.NO_ERROR) {
             Toast.makeText(this, "抱歉，未找到结果", Toast.LENGTH_SHORT).show();
         }
@@ -233,23 +253,31 @@ public class Act_Map extends AppCompatActivity implements OnGetRoutePlanResultLi
             if(overlayManager!=null){
                 overlayManager.removeFromMap();
             }
+            WalkingRouteLine routeLine=walkingRouteResult.getRouteLines().get(0);
             WalkingRouteOverlay overlay=new WalkingRouteOverlay(baiduMap);
-            overlay.setData(walkingRouteResult.getRouteLines().get(0));
+            overlay.setData(routeLine);
             overlayManager=overlay;
+
+            tips.setText("查看路线");
             //将公交路线规划覆盖物添加到地图中
             overlayManager.addToMap();
             overlayManager.zoomToSpan();
 
             List<WalkingRouteLine> routeLines=walkingRouteResult.getRouteLines();
             List<WalkingRouteLine.WalkingStep> steps=routeLines.get(0).getAllStep();
+            luxians.clear();
             for(WalkingRouteLine.WalkingStep step:steps){
                 Log.i("asd",step.getInstructions());
+                luxians.add(step.getInstructions());
             }
+            adapter.notifyDataSetChanged();
         }
     }
 
     @Override
     public void onGetTransitRouteResult(TransitRouteResult transitRouteResult) {
+        gotype.setVisibility(View.GONE);
+
         if (transitRouteResult == null || transitRouteResult.error != SearchResult.ERRORNO.NO_ERROR) {
             Toast.makeText(this, "抱歉，未找到结果", Toast.LENGTH_SHORT).show();
         }else if(transitRouteResult.error == SearchResult.ERRORNO.AMBIGUOUS_ROURE_ADDR) {
@@ -274,10 +302,13 @@ public class Act_Map extends AppCompatActivity implements OnGetRoutePlanResultLi
                 overlayManager.addToMap();
                 overlayManager.zoomToSpan();
                 List<TransitRouteLine.TransitStep> transitSteps=routeLine.getAllStep();
+                luxians.clear();
                 for(TransitRouteLine.TransitStep transitStep:transitSteps){
                     transitStep.getInstructions();
+                    luxians.add(transitStep.getInstructions());
                     Log.i("asd",transitStep.getInstructions());
                 }
+                adapter.notifyDataSetChanged();
                 Log.i("asd","哈哈哈");
             }
         }
@@ -301,5 +332,23 @@ public class Act_Map extends AppCompatActivity implements OnGetRoutePlanResultLi
         }else{
             gotype.setVisibility(View.VISIBLE);
         }
+    }
+
+    LinearLayout bottom;
+    TextView tips;
+    LinearLayout bottomlist;
+    ListView listView;
+
+    FloatingActionButton dingwei;
+    FloatingActionButton luxian;
+    public void showluxian(View view) {
+        dingwei.setVisibility(View.GONE);
+        luxian.setVisibility(View.GONE);
+        bottomlist.setVisibility(View.VISIBLE);
+    }
+    public void hideluxian(View view) {
+        dingwei.setVisibility(View.VISIBLE);
+        luxian.setVisibility(View.VISIBLE);
+        bottomlist.setVisibility(View.GONE);
     }
 }
