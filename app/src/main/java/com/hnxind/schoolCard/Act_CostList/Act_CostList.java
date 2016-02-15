@@ -46,7 +46,7 @@ import java.util.logging.SimpleFormatter;
 public class Act_CostList extends AppCompatActivity {
     Context context=this;
     UserInfo userInfo;
-    ScrollView dateLayout;//选择时间容器
+    LinearLayout dateLayout;//选择时间容器
     LinearLayout listLayout;//数据展示容器
     DatePicker datePicker;//日期选择器
     ListView listView;//你懂的
@@ -76,7 +76,7 @@ public class Act_CostList extends AppCompatActivity {
         swipeRefreshLayout.setProgressViewOffset(false, 0, 60);
         swipeRefreshLayout.setRefreshing(true);
 
-        dateLayout=(ScrollView)findViewById(R.id.datelayout);
+        dateLayout=(LinearLayout)findViewById(R.id.datelayout);
         datePicker=(DatePicker)findViewById(R.id.datepicker);
 
         listLayout=(LinearLayout)findViewById(R.id.listLayout);

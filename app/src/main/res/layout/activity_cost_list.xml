@@ -13,31 +13,27 @@
         android:fitsSystemWindows="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    <ScrollView
+    <LinearLayout
         android:id="@+id/datelayout"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:padding="40dp"
-            android:orientation="vertical"
+        android:layout_height="wrap_content">
+        j<DatePicker
+            android:id="@+id/datepicker"
+            android:calendarViewShown="false"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <DatePicker
-                android:layerType="none"
-                android:id="@+id/datepicker"
-                android:calendarViewShown="false"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <Button
-                android:onClick="confirm"
-                android:textColor="#fff"
-                android:text="确认"
-                android:background="@drawable/login_btn"
-                android:layout_marginTop="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="50dp" />
-        </LinearLayout>
-    </ScrollView>
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <Button
+            android:layout_margin="40dp"
+            android:onClick="confirm"
+            android:textColor="#fff"
+            android:text="确认"
+            android:background="@drawable/login_btn"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/listLayout"
         android:orientation="vertical"
